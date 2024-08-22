@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import asyncHandler from 'express-async-handler';
 import userSchema from '../models/userSchema.js';
 import Activity from "../models/activitySchema.js";
-const ACESS_TOKEN_SECRET = 'Footprint123'
+
 
 import Groq from 'groq-sdk';
 
@@ -75,9 +75,6 @@ const getActivitesByCategory = asyncHandler(async (req,res) => {
 
 
 // function to integrate AI
-const groq = new Groq({
-    apiKey: "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"
-});
 
 async function main(email) {
     try {
