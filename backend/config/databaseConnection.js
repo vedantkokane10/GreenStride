@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-const uri = 'mongodb+srv://vedantkokanevk:admin@cluster0.mvftljg.mongodb.net/Carbon_FootPrint_Tracker?retryWrites=true&w=majority&appName=Cluster0'
 
 
 const connectDB = async () =>{
