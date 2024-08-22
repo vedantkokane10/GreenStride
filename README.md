@@ -1,4 +1,4 @@
-# GreenStride
+# GreenStride - https://greenstride-frontend.onrender.com/
 
 **GreenStride** is an AI-powered web application designed to help users track and reduce their carbon footprint. By logging daily activities, users can receive personalized insights and AI-generated suggestions on how to minimize their environmental impact.
 
@@ -19,14 +19,7 @@
 - **AI Models**: Utilizes AI models for generating personalized improvement suggestions
 - **Deployment**: Render.com
 
-## Getting Started
 
-### Prerequisites
-
-- Node.js (v14.x or later)
-- npm (v6.x or later)
-
-### Installation
 
 1. Clone the repository:
 
