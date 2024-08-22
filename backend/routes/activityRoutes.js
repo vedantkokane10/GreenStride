@@ -4,7 +4,7 @@ import {validateToken} from '../middleware/validateTokenHandler.js'
 import {getLeaderboard} from '../controllers/LeaderboardController.js';
 const router = express.Router();
 
-router.get('/',() =>{
+router.get('/',(req,res) =>{
     res.json({'message' : "Activity api"})
 });
 
