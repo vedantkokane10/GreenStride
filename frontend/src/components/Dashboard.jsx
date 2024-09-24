@@ -61,14 +61,14 @@ const Dashboard = () => {
     <div className='charts'>
       {
         activities.length === 0 ?
-        <h3>No Activities found</h3>
+        <h3 style={{color:"black"}}>No Activities found</h3>
         :
         <>
         <h3></h3>
         <LineChartComponent totalEmissionDateWise={totalEmissionDateWise}  />
         <br></br><br></br><br></br><br></br>
         <br></br><br></br>
-        <h2>Total CO2 Emissions by different types of Activites</h2>
+        <h2 style={{color:"black"}}>Total CO2 Emissions by different types of Activites</h2>
         <PieChart totalEmissionTypeWise={totalEmissionTypeWise}  />
         </>
       }

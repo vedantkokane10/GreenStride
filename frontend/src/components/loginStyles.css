@@ -7,7 +7,12 @@ body {
     /* background:linear-gradient(to right top, #375677, #335c78, #316179, #336678, #376b77); */
     /* background: linear-gradient(to right top, #053732, #00614d, #008e5f, #00bc65, #12eb5e);; */
     /* background: linear-gradient(to right top, #29564d, #18614e, #006c4b, #007643, #048036); */
-    background: linear-gradient(to right top, #264d21, #3c5c24, #556a26, #6f7929, #8c862e);
+    /* background: linear-gradient(to right top, #264d21, #3c5c24, #556a26, #6f7929, #8c862e); */
+    background-color: #ffffff;
+    /* opacity: 0.3; */
+    background-image:  linear-gradient(#adafb9 2.6px, transparent 2.6px), linear-gradient(90deg, #adafb9 2.6px, transparent 2.6px), linear-gradient(#adafb9 1.3px, transparent 1.3px), linear-gradient(90deg, #adafb9 1.3px, #ffffff 1.3px);
+    background-size: 65px 65px, 65px 65px, 13px 13px, 13px 13px;
+    background-position: -2.6px -2.6px, -2.6px -2.6px, -1.3px -1.3px, -1.3px -1.3px;
     background-size: cover; /* Cover the entire background */
     height: 100vh;
 }
@@ -65,6 +70,8 @@ input{
     font-weight: 300;
     color :black;
     font-weight: bolder;
+    border-color: #007BFF;
+    border: black;
 }
 
 .formButton{
@@ -75,3 +82,39 @@ input{
     border-radius: 25px;
     padding: 5px;
 }
+
+input:focus {
+    border-color: #007BFF; /* Optional: changes border color when focused */
+  }
+
+  input {
+    display: block;
+    height: 40px;
+    width: 100%;
+    background-color: white;
+    border-radius: 25px;
+    padding: 0 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: black;
+    border: 0.5px solid #000000; /* Ensure border is visible with black color */
+    outline: none; /* Remove default outline on focus */
+}
+
+input:focus {
+    border-color: #006640; /* Change border color on focus */
+    border-width: 2px; /* Define border width */
+    border-style: solid; /* Ensure solid border style */
+}
+
+
+.nav-link{
+    color: black;
+}
+
+
+button {
+    border: 1px solid black;
+}
+

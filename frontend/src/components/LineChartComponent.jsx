@@ -40,9 +40,8 @@ const LineChartComponent = ({ totalEmissionDateWise }) => {
         label: "CO2 Emissions",
         data: emissions,  // Use the extracted emissions here
         fill: false,
-        borderColor: "white",
-        backgroundColor: "white"
-        
+        borderColor: "black",
+        backgroundColor: "black"
       }
     ]
   };
@@ -53,13 +52,14 @@ const LineChartComponent = ({ totalEmissionDateWise }) => {
         title:{
           display: true,
           text: "Date",
-          color: 'white'
+          color: 'black'
         },
         grid: {
-          color: 'rgba(255, 255, 255, 0.1)', // Lighter grid lines
+          color: 'rgba(0, 0, 0, 0.5)'
+          // color: 'rgba(255, 255, 255, 0.1)', // Lighter grid lines
         },
         ticks: {
-          color: 'white', // Set the color of the tick labels
+          color: 'black', // Set the color of the tick labels
         },
         // backgroundColor: 'white',
       },
@@ -67,20 +67,22 @@ const LineChartComponent = ({ totalEmissionDateWise }) => {
         title:{
           display:true,
           text: "Total CO2 Emissions (kg)",
-          color: 'white'
+          color: 'black'
         },
         grid: {
-          color: 'rgba(255, 255, 255, 0.1)', // Lighter grid lines
+          // color: 'black'
+          color: 'rgba(0, 0, 0, 0.2)'
+          // color: 'rgba(255, 255, 255, 0.1)', // Lighter grid lines
         },
         ticks: {
-          color: 'white', // Set the color of the tick labels
+          color: 'black', // Set the color of the tick labels
         }
       }
     },
     plugins: {
       legend: {
         labels: {
-          color: 'white', // Set the color of the legend text
+          color: 'black', // Set the color of the legend text
         },
       },
     },
@@ -88,7 +90,7 @@ const LineChartComponent = ({ totalEmissionDateWise }) => {
 
   return (
     <div style={{ width: '1000px', height: '500px', align:"center" }}>
-      <h2>Total CO2 Emissions by Date</h2>
+      <h2 style={{color:"black"}}>Total CO2 Emissions by Date</h2>
       <Line data={dataVisualize} options={options} />
     </div>
   );

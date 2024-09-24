@@ -15,14 +15,16 @@ export const PieChart = ({totalEmissionTypeWise}) => {
 
   const visualizeData = {
     labels: types,
-    color: 'white',
+    color: 'black',
     datasets: [{
       data: emissions,
-      color: 'white',
+      color: 'black',
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)', 
-        'rgba(54, 162, 235, 0.2)', 
-        'rgba(255, 206, 86, 0.2)'
+        'rgba(255, 99, 132, 0.8)', 
+        'rgba(54, 162, 235, 0.8)', 
+        'rgba(222, 162, 235, 0.8)', 
+        'rgba(255, 206, 86, 0.8)',
+        'rgba(225, 206, 12, 0.8)'
       ],
       borderColor: [
         'rgba(255, 99, 132, 1)', 
@@ -39,7 +41,7 @@ export const PieChart = ({totalEmissionTypeWise}) => {
     plugins: {
       legend: {
         labels: {
-          color: 'white', // Set legend label color to white
+          color: 'black', // Set legend label color to white
         },
       },
       tooltip: {

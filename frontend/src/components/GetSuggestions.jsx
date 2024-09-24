@@ -41,11 +41,12 @@ const GetSuggestions = () => {
     //   )}
     // </div>
     <div className="suggestions-container">
-      <h2 className="suggestions-title">Suggestions to improve CO2 emissions based on your acitvities</h2>
-      {loading && <p className="loading-text">Loading...</p>}
-      {error && <p className="error-text">Error: {error}</p>}
+      <div className='suggestions-container-background'></div>
+      <h2 className="suggestions-title" style={{color:"black"}}>Suggestions to improve CO2 emissions based on your acitvities</h2>
+      {loading && <p className="loading-text" style={{color:"black"}}>Loading...</p>}
+      {error && <p className="error-text" style={{color:"black"}}>Error: {error}</p>}
       {!loading && !error && (
-        <div className="suggestions-content">
+        <div className="suggestions-content" style={{color:"black"}}>
           {activities.split('\n').map((line, index) => (
             <p key={index} className="suggestion-line">{line}</p>
           ))}

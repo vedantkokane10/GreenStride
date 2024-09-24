@@ -31,16 +31,16 @@ const Leaderboard = () => {
         getLeaderboardUsers();
     }, [accessToken]);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+    if (loading) return <p style={{color:"black"}}>Loading...</p>;
+    if (error) return <p style={{color:"black"}}>{error}</p>;
 
     return (
-        <div>
+        <div style={{color:"black"}}>
             <h2>Leaderboard for this Month!</h2>
             {leaderboardUsers.length === 0 ? (
                 <h3>No activities found</h3>
             ) : (
-                <table id='records'>
+                <table id='records' style={{border:"1px solid black"}}>
                     <thead>
                         <tr>
                             <th>Position</th>

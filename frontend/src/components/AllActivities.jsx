@@ -32,19 +32,19 @@ const AllActivities = () => {
   },[]);
   return (
     <div>
-        <h2>Your Recent Activities</h2>
+        <h2 style={{color:"black"}}>Your Recent Activities</h2>
         {activities.length === 0 ? 
-        <h3>No activities Found</h3>
+        <h3 style={{color:"black"}}>No activities Found</h3>
         : 
-        <table id='records'>
-            <tr>
+        <table id='records' style={{color:"black", border: "1px solid black"}}>
+            <tr style={{color:"black", border: "1px solid black"}}>
                 <th>Date</th>
                 <th>Activity</th>
                 <th>CO2 Emission in kg</th>
             </tr>
             {activities.map((activity) => (
 
-            <tr>
+            <tr style={{color:"black", border: "1px solid black"}}>
                 <td>{activity.date.split('T')[0]}</td>
                 <td>{activity.type}</td>
                 <td>{Math.round(activity.carbonEmission * 100) / 100}</td>

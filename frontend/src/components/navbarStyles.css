@@ -1,0 +1,27 @@
+body{
+    right: 0;
+    
+}
+
+.nav-link{
+    color: black;
+}
+
+.nav-link :hover{
+    background-color: white;
+
+}
+
+.navOverlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    opacity: 0.3;
+    background-image:  linear-gradient(#adafb9 0.6000000000000001px, transparent 0.6000000000000001px), linear-gradient(to right, #adafb9 0.6000000000000001px, #ffffff 0.6000000000000001px);
+    background-size: 12px 12px;
+    opacity: 0.3;
+    height: 130vh;
+    background-attachment: fixed;
+    z-index: -1; /* Lower z-index to place the background behind the content */
+}

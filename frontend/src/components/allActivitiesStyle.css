@@ -15,7 +15,20 @@ body {
     padding: 0;
     height: 100%;
     height: 200vh;
-    background: linear-gradient(to right top, #264d21, #3c5c24, #556a26, #6f7929, #8c862e);
+    /* background: linear-gradient(to right top, #264d21, #3c5c24, #556a26, #6f7929, #8c862e); */
     background-size: cover;
     background-attachment: fixed; /* Optional: Keeps background fixed during scroll */
+}
+
+button {
+    border: 1px solid black;
+}
+
+table {
+    border: 1px solid black;
+    
+}
+
+table, th, td {
+    border: 1px solid black;
 }

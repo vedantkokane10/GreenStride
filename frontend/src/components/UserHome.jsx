@@ -29,7 +29,7 @@ const UserHome = () => {
       </div>
 
       <div className='text-part'>
-        <h4>Track Your Impact, Save Our Planet</h4>
+        <h4 style={{color:"black"}}>Track Your Impact, Save Our Planet</h4>
       </div>
       <div className='bottom-part'>
         <button onClick={addActivity}>Add Today's Activities</button>

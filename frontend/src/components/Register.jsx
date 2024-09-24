@@ -42,8 +42,9 @@ const Register = () => {
 
   return (
     <div>
+         <div className="background-overlay"></div>
         <form onSubmit={handleRegister}>
-            <h1>Register!</h1>
+            <h1 style={{color:"black"}}>Register!</h1>
             <input type='text' name='username' placeholder='username' value={userName} onChange={userNameChange} />
             <input type='email' name='email' placeholder='email' value={email} onChange={emailChange} />
             <input type='password' name='password' placeholder='password' value={password} onChange={passwordChange} />

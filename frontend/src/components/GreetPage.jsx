@@ -17,12 +17,13 @@ const GreetPage = () => {
   };
   return (
     <div className='greeting-page'>
+      <div className="background-overlay"></div>
       <div className='content'>
         <div className='image-part'>
           <img src={greenEarth} alt="Foot" />
         </div>
         <div className='right-part'>
-          <p>Take the First Step Towards a Greener Future</p>   
+          <p style={{color:"black"}}>Take the First Step Towards a Greener Future</p>   
 
 
         <div className="container">

@@ -31,3 +31,12 @@ input{
     border-radius: 25px;
     padding: 5px;
 }
+
+.formButton:hover{
+    cursor: pointer;
+}
+
+
+button {
+    border: 1px solid black;
+}

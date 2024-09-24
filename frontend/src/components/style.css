@@ -53,3 +53,7 @@ body {
 .nav-link.active {
   background-color: #1abc9c; /* Highlighted color for the active tab */
 }
+
+button {
+  border: 1px solid black;
+}
