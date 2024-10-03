@@ -30,6 +30,29 @@ const AllActivities = () => {
     }
     getAtivities();
   },[]);
+
+
+  const ActivityType = (activity) =>{
+    if(activity === "carTravel"){
+        return "Car Travel";
+    }
+    else if(activity === "riceConsumption"){
+        return "Rice Consumption";
+    }
+    else if(activity === "lpgUsage"){
+        return "LPG Gas Usage";
+    }
+    else if(activity === "airTravel"){
+        return "Air Travel";
+    }
+    else if(activity === "twoWheelerTravel"){
+        return "Two-Wheeler Travel";
+    }
+    else if(activity === "electricity"){
+        return "Electricity Consumption";
+    }
+  }
+  
   return (
     <div>
         <h2 style={{color:"black"}}>Your Recent Activities</h2>
@@ -46,7 +69,7 @@ const AllActivities = () => {
 
             <tr style={{color:"black", border: "1px solid black"}}>
                 <td>{activity.date.split('T')[0]}</td>
-                <td>{activity.type}</td>
+                <td>{ActivityType(activity.type)}</td>
                 <td>{Math.round(activity.carbonEmission * 100) / 100}</td>
             </tr>
             ))}
