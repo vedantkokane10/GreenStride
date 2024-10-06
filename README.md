@@ -17,5 +17,6 @@
 - **APIs**: Integration with various public APIs for activity data analysis
 - **AI Models**: Utilizes AI models for generating personalized improvement suggestions
 
-Live Hosted Link - https://greenstride-frontend.onrender.com/
-Video Demo Link - https://www.youtube.com/watch?v=BAy8GC4HX14
+## Live Hosted Link - https://greenstride-frontend.onrender.com/
+
+## Video Demo Link - https://www.youtube.com/watch?v=BAy8GC4HX14
