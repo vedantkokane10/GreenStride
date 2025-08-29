@@ -1,0 +1,120 @@
+body {
+    margin: 0; /* Ensure there are no margins */
+    padding: 0; /* Ensure there are no paddings */
+     /* Ensure the body covers the full viewport height */
+    /* background: linear-gradient(to right top, #136029, #367228, #578424, #7a951f, #a0a51b); */
+    /* background: linear-gradient(to right top, #136029, #357027, #537f24, #738d20, #959a1d);; */
+    /* background:linear-gradient(to right top, #375677, #335c78, #316179, #336678, #376b77); */
+    /* background: linear-gradient(to right top, #053732, #00614d, #008e5f, #00bc65, #12eb5e);; */
+    /* background: linear-gradient(to right top, #29564d, #18614e, #006c4b, #007643, #048036); */
+    /* background: linear-gradient(to right top, #264d21, #3c5c24, #556a26, #6f7929, #8c862e); */
+    background-color: #ffffff;
+    /* opacity: 0.3; */
+    background-image:  linear-gradient(#adafb9 2.6px, transparent 2.6px), linear-gradient(90deg, #adafb9 2.6px, transparent 2.6px), linear-gradient(#adafb9 1.3px, transparent 1.3px), linear-gradient(90deg, #adafb9 1.3px, #ffffff 1.3px);
+    background-size: 65px 65px, 65px 65px, 13px 13px, 13px 13px;
+    background-position: -2.6px -2.6px, -2.6px -2.6px, -1.3px -1.3px, -1.3px -1.3px;
+    background-size: cover; /* Cover the entire background */
+    height: 100vh;
+}
+form{
+    margin-top: 0px;
+    height: 350px;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+    color: #ffffff;
+}
+form *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h1{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+    margin-bottom: 50px;
+    color:"white";
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    font-weight: bolder;
+    
+}
+
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+input{
+    display: block;
+    height: 40px;
+    width: 100%;
+    background-color: white;
+    border-radius: 25px;
+    padding: 0 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color :black;
+    font-weight: bolder;
+    border-color: #007BFF;
+    border: black;
+}
+
+.formButton{
+    margin-top: 20px;
+    color: black;
+    width: 80px;
+    height: 30px;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+input:focus {
+    border-color: #007BFF; /* Optional: changes border color when focused */
+  }
+
+  input {
+    display: block;
+    height: 40px;
+    width: 100%;
+    background-color: white;
+    border-radius: 25px;
+    padding: 0 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: black;
+    border: 0.5px solid #000000; /* Ensure border is visible with black color */
+    outline: none; /* Remove default outline on focus */
+}
+
+input:focus {
+    border-color: #006640; /* Change border color on focus */
+    border-width: 2px; /* Define border width */
+    border-style: solid; /* Ensure solid border style */
+}
+
+
+.nav-link{
+    color: black;
+}
+
+
+button {
+    border: 1px solid black;
+}
+

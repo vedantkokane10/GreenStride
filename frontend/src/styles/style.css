@@ -1,0 +1,59 @@
+body {
+    margin: 0; /* Ensure there are no margins */
+    padding: 0; /* Ensure there are no paddings */
+    height: 100vh; /* Ensure the body covers the full viewport height */
+    /* background: linear-gradient(to right top, #136029, #367228, #578424, #7a951f, #a0a51b); */
+    /* background: linear-gradient(to right top, #136029, #357027, #537f24, #738d20, #959a1d);; */
+    /* background:linear-gradient(to right top, #375677, #335c78, #316179, #336678, #376b77); */
+    /* background: linear-gradient(to right top, #053732, #00614d, #008e5f, #00bc65, #12eb5e);; */
+    /* background: linear-gradient(to right top, #29564d, #18614e, #006c4b, #007643, #048036); */
+    background: linear-gradient(to right top, #264d21, #3c5c24, #556a26, #6f7929, #8c862e);
+    background-size: cover; /* Cover the entire background */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  /* background-color: #2c3e50; Dark background for the navbar */
+  /* background:  linear-gradient(to bottom, #376b77, #376b77, #376b77, #376b77, #376b77); */
+  color: white;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+
+.Logo h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.NavItems {
+  display: flex;
+  gap: 1rem; /* Space between the tabs */
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  background-color: #34495e; /* Slightly lighter background on hover */
+}
+
+.nav-link.active {
+  background-color: #1abc9c; /* Highlighted color for the active tab */
+}
+
+button {
+  border: 1px solid black;
+}
