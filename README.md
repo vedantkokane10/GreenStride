@@ -2,7 +2,7 @@
 
 **AI-Powered Carbon Footprint Tracking Web App**  
 🗓️ *Project Date: October 2024*  
-🔗 **Live App**: I had to take it down due to high hosting costs. I'm working on optimizing things and will get it back online soon. Until then, feel free to check out the demo video!
+🔗 **Live App**: http://13.51.189.177/
 🎥 **Demo Video**: [Watch on YouTube](https://www.youtube.com/watch?v=BAy8GC4HX14)
 
 ---
