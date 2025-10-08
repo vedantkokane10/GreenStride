@@ -11,7 +11,7 @@ import GetSuggestions from './pages/GetSuggestionPage/GetSuggestions';
 import Navbar from './components/Navbar';
 import GreetPage from './pages/GreetPage/GreetPage';
 import  Leaderboard  from './pages/LeaderboardPage/Leaderboard';
-
+import AddBlogPage from './pages/AddBlogPage/AddBlogPage';
 import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -34,6 +34,7 @@ function App() {
             <Route exact path="/dashboard" element={<Dashboard />} />
             <Route exact path="/suggestion" element={<GetSuggestions />} />
             <Route exact path="/leaderboard" element={<Leaderboard />} />
+            <Route exact path="/addblog" element={<AddBlogPage />} />
           </Routes>
         </div>
       </Router>

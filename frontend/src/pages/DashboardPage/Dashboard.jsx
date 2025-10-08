@@ -15,13 +15,7 @@ const Dashboard = () => {
   useEffect(() =>{
     const getAtivities = async () => {
         try{
-            const response = await API.get('/activity/getActivities',
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            }
-            );
+            const response = await API.get('/activity/');
             
             setActivities(response.data);
             console.log(activities);

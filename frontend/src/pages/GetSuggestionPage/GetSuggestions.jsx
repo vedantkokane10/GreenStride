@@ -14,11 +14,7 @@ const GetSuggestions = () => {
   useEffect(() => {
     const getSuggestions = async () => {
       try {
-        const response = await API.get('/activity/getSuggestions', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        });
+        const response = await API.get('/activity/suggestions');
 
         console.log(response.data)
 

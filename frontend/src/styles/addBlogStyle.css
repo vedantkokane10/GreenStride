@@ -1,0 +1,82 @@
+.addBlogContainer {
+    padding: 40px;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+.addBlogContainer {
+    padding: 40px;
+    color: black;
+    font-family: Arial, sans-serif;
+
+    /* Make full screen */
+    width: 100%;
+    min-height: 100vh;
+
+    /* Remove the box effect */
+    background: none;
+    box-shadow: none;
+}
+.addBlogForm {
+    width: 80%;
+    max-width: 100%; /* Remove restriction */
+    box-shadow: none;
+    padding: 0; /* Remove padding around */
+}
+
+
+.addBlogForm label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.addBlogForm input,
+.addBlogForm textarea {
+    width: 100%;
+    color: black;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    /* color: black; */
+
+    transition: border 0.3s ease;
+}
+
+.addBlogForm input:focus,
+.addBlogForm textarea:focus {
+    border: 1px solid #2ecc71;
+    outline: none;
+    /* background-color: #fff; */
+}
+
+.addBlogForm textarea {
+    /* min-height: 250px;
+    resize: vertical; */
+}
+
+
+.formButton{
+    margin-top: 20px;
+    color: black;
+    background-color: white;
+    width: 80px;
+    height: 30px;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.formButton:hover{
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+
+
+button {
+    border: 1px solid black;
+}

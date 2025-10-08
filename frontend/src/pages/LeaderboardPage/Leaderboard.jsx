@@ -14,11 +14,7 @@ const Leaderboard = () => {
     useEffect(() => {
         const getLeaderboardUsers = async () => {
             try {
-                const response = await API.get('/activity/getLeaderboard', {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`
-                    }
-                });
+                const response = await API.get('/activity/leaderboard');
                 console.log(response.data);
                 setLeaderboardUsers(response.data);
 

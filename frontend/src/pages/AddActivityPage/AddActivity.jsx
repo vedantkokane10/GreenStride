@@ -69,11 +69,7 @@ const AddActivity = () => {
             if (type === 'electricity') {
                 emission = (powerWatt / 1000) * hours;
             }
-            const response = await API.post('/activity/addActivity', { type, carbonEmission: emission }, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
-            });
+            const response = await API.post('/activity', { type, carbonEmission: emission });
             console.log(response.data);
             toast.success("Added New Actitvity!", {
               position: "top-right",

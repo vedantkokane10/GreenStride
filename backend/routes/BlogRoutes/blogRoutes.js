@@ -9,29 +9,29 @@ const router = express.Router();
 // @description add new blog
 // @route POST /addBlog
 // @access public
-router.post('/addBlog',validateToken,handler,addBlog);
+router.post('/',validateToken,handler,addBlog);
 
 
 // @description get all Blogs
 // @route GET /getAllBlogs
 // @access public
-router.get('/getAllBlogs',validateToken, getAllBlogs);
+router.get('/',validateToken, getAllBlogs);
 
 
 // @description get all blogs of associated to a particular user
 // @route GET /getUserBlogs
 // @access public
-router.get('/getUserBlogs', validateToken, handler, getBlogs);
+router.get('/user-blogs', validateToken, handler, getBlogs);
 
 // @description update a blog
 // @route PATCH /updateBlog
 // @access public
-router.patch('/updateBlog', validateToken, handler, updateBlog);
+router.patch('/', validateToken, handler, updateBlog);
 
 // @description delete a blog
 // @route DELETE /deleteBlog
 // @access public
-router.delete('/deleteBlog', validateToken, handler, deleteBlog);
+router.delete('/', validateToken, handler, deleteBlog);
 
 
 export default router;

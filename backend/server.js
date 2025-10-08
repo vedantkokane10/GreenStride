@@ -8,6 +8,7 @@ import authenticationRoutes from './routes/AuthenticationRoutes/authenticationRo
 import activityRoutes from './routes/ActivityRoutes/activityRoutes.js'
 import blogRoutes from './routes/BlogRoutes/blogRoutes.js'
 
+import { rateLimit } from "express-rate-limit";
 
 const app = express();
 
@@ -16,11 +17,28 @@ app.use(express.json());
 
 const PORT = 8000;
 
-connectDB();
+// connecting to mongodb database
+connectDB(); 
 
+
+// connecting to postgresSQL database
 pool.connect()
   .then(() => console.log('Connected to the PostgresSQL database'))
   .catch((err) => console.error('Error connecting to the database:', err));
+
+
+
+// rate limititing to avoid DoS attack (15 mins => 100 requests) 
+const limiter = rateLimit({
+  windowMs: (15 * 60) * 1000,
+  max:100,
+  message: "Too many requests, please try again later.",
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+// (fixed window counter algo used)
+app.use(limiter)
 
 
 const greetMessage = (req,res) => {
@@ -29,11 +47,11 @@ const greetMessage = (req,res) => {
 
 app.get('/',greetMessage);
 
-app.use('/api/authentication/',authenticationRoutes);
+app.use('/api/authentication',authenticationRoutes);
 
-app.use('/api/activity/',activityRoutes);
+app.use('/api/activity',activityRoutes);
 
-app.use('/api/blog/', blogRoutes);
+app.use('/api/blog', blogRoutes);
 
 app.listen(PORT,function(){
     console.log("App started at " + PORT);

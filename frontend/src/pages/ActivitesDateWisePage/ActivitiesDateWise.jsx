@@ -4,6 +4,11 @@ import {AuthContext} from '../../context/AuthContext';
 import '../../styles/dashboardStyle.css'
 
 
+let config = {
+  method:'get',
+  url:'/activity/'
+};
+
 const ActivitiesDateWise = () => {
   const {setAuthenticated} = useContext(AuthContext)
   const [activities, setActivities] = useState([]);
@@ -13,11 +18,7 @@ const ActivitiesDateWise = () => {
     setAuthenticated(true);
     const getActivities = async () => {
       try {
-        const response = await API.get('/activity/getActivities', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        const response = await API.get('/activity');
         
         setActivities(response.data);
       } catch (error) {
