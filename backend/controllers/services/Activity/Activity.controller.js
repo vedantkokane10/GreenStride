@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
-import Activity from '../../../models/ActivityModel/activity.js';
-import User from '../../../models/UserModel/user.js';
+import Activity from '../../../models/ActivityModel/activity.model.js';
+import User from '../../../models/UserModel/user.model.js';
 import Groq from 'groq-sdk';
 import dotenv from 'dotenv';
 

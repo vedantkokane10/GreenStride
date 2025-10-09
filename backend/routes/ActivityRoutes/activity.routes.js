@@ -1,7 +1,7 @@
 import express from 'express';
-import {addActivity, getActivitesByDate,getActivites,getActivitesByCategory,getSuggestions} from '../../controllers/services/Activity/ActivityController.js';
+import {addActivity, getActivitesByDate,getActivites,getActivitesByCategory,getSuggestions} from '../../controllers/services/Activity/Activity.controller.js';
 import {validateToken} from '../../middleware/JWT Token Handler/validateTokenHandler.js'
-import {getLeaderboard} from '../../controllers/services/Leaderboard/LeaderboardController.js';
+import {getLeaderboard} from '../../controllers/services/Leaderboard/Leaderboard.controller.js';
 const router = express.Router();
 
 

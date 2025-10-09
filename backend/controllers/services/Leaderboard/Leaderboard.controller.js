@@ -1,4 +1,4 @@
-import Activity from '../../../models/ActivityModel/activity.js';
+import Activity from '../../../models/ActivityModel/activity.model.js';
 
 Activity.initialize();
 

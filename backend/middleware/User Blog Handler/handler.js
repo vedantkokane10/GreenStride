@@ -1,4 +1,4 @@
-import User from "../../models/UserModel/user.js";
+import User from "../../models/UserModel/user.model.js";
 
 
 const handler = async (req, res, next) =>{

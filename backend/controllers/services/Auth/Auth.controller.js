@@ -1,7 +1,7 @@
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import asyncHandler from 'express-async-handler';
-import User from "../../../models/UserModel/user.js";
+import User from "../../../models/UserModel/user.model.js";
 import dotenv from 'dotenv';
 
 dotenv.config();

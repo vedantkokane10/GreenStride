@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
     userName:{
         type: String,
-        required: [true, "Please enter a name"],
+        reuired: [true, "Please enter a name"],
         trim: true // to remove whitespace
     },
     email:{

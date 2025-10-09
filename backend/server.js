@@ -4,9 +4,9 @@ import cors from "cors";
 import {connectDB} from './config/mongoDB/db.js';
 import pool from "./config/postgresSQL/db.js";
 
-import authenticationRoutes from './routes/AuthenticationRoutes/authenticationRoutes.js'
-import activityRoutes from './routes/ActivityRoutes/activityRoutes.js'
-import blogRoutes from './routes/BlogRoutes/blogRoutes.js'
+import authenticationRoutes from './routes/AuthenticationRoutes/authentication.routes.js'
+import activityRoutes from './routes/ActivityRoutes/activity.routes.js'
+import blogRoutes from './routes/BlogRoutes/blog.routes.js'
 
 import { rateLimit } from "express-rate-limit";
 

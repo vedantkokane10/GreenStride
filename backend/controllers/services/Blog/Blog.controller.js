@@ -1,5 +1,5 @@
 import Groq from 'groq-sdk';
-import Blog from '../../../models/BlogModel/blog.js';
+import Blog from '../../../models/BlogModel/blog.model.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
