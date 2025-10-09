@@ -1,27 +1,25 @@
-body{
-    right: 0;
-    
-}
-
-.nav-link{
+.nav-link {
     color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-.nav-link :hover{
-    background-color: white;
-
+.nav-link:hover {
+    background-color: #000000;
+    border-radius: 4px;
 }
 
-.navOverlay{
+.navOverlay {
     position: absolute;
     width: 100%;
-    height: 100%;
-    background-color: #ffffff;
-    opacity: 0.3;
-    background-image:  linear-gradient(#adafb9 0.6000000000000001px, transparent 0.6000000000000001px), linear-gradient(to right, #adafb9 0.6000000000000001px, #ffffff 0.6000000000000001px);
-    background-size: 12px 12px;
-    opacity: 0.3;
     height: 130vh;
+    background-color: #ffffff;
+    background-image: 
+        linear-gradient(#adafb9 0.6px, transparent 0.6px),
+        linear-gradient(to right, #adafb9 0.6px, #ffffff 0.6px);
+    background-size: 12px 12px;
     background-attachment: fixed;
-    z-index: -1; /* Lower z-index to place the background behind the content */
+    opacity: 0.3;
+    z-index: -1; /* stays behind navbar */
 }

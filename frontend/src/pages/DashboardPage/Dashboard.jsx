@@ -15,7 +15,7 @@ const Dashboard = () => {
   useEffect(() =>{
     const getAtivities = async () => {
         try{
-            const response = await API.get('/activity/');
+            const response = await API.get('/activity/current-month');
             
             setActivities(response.data);
             console.log(activities);

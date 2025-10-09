@@ -90,7 +90,7 @@ const LineChartComponent = ({ totalEmissionDateWise }) => {
 
   return (
     <div style={{ width: '1000px', height: '500px', align:"center" }}>
-      <h2 style={{color:"black"}}>Total CO2 Emissions by Date</h2>
+      <h2 style={{color:"black"}}>Total CO2 Emissions by Date for current Month</h2>
       <Line data={dataVisualize} options={options} />
     </div>
   );

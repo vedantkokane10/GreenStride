@@ -24,6 +24,8 @@ const emissionFactors = {
 };
 
 
+
+
 const addActivity = asyncHandler(async (req, res) => {
     const emissionType = req.body.type;
     const carbonEmission = req.body.carbonEmission;
@@ -53,7 +55,8 @@ const addActivity = asyncHandler(async (req, res) => {
         console.log(activity);
         const newActivity = await Activity.addActivity(activity);
         res.status(201).json({ message: 'Activity added successfully', activity: newActivity });
-    } catch (error) {
+    } 
+    catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 });
@@ -196,7 +199,45 @@ const getSuggestions = async (req,res) =>{
 }
 
 
-export {addActivity,getActivites,getActivitesByCategory,getSuggestions, getActivitesByDate};
+const getActivities = async (req,res) =>{
+    try {
+        let result = await Activity.getAllActivities(req.user.email);
+        let page = parseInt(req.query.page) || 1;
+        let limit = parseInt(req.query.limit) || 10;
+
+        let startIndex = (page-1) * limit;
+        let endIndex = page * limit;
+        
+        let response = {};
+
+        if(startIndex > 0){
+            response.previous = {
+                'url': `${req.baseUrl}?page=${page-1}&limit=${limit}`
+            }
+        }
+
+        if(endIndex < result.length){
+            response.next = {
+                'url': `${req.baseUrl}?page=${page+1}&limit=${limit}`
+            }
+        }
+        
+        //console.log(req);
+
+        response.result = result.slice(startIndex, endIndex);
+
+        response.statusCode = 200;
+        response.success = true;
+
+        res.status(200).json(response);
+
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+}
+
+export {addActivity,getActivites,getActivitesByCategory,getSuggestions, getActivitesByDate, getActivities};
 
 
 
