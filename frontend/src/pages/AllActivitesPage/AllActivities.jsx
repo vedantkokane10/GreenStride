@@ -102,7 +102,6 @@ const AllActivities = () => {
     const getActivities = async () => {
       try {
         const response = await API.get(url);
-
         setActivities(response.data.result);
         setNextPage(response.data.next ? response.data.next.url.replace("/api", "") : null);
         setPrevPage(response.data.previous ? response.data.previous.url.replace("/api", "") : null);
@@ -112,7 +111,7 @@ const AllActivities = () => {
     };
 
     getActivities();
-  }, [url]);
+  }, [url, setAuthenticated]);
 
   const ActivityType = (activity) => {
     switch (activity) {

@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [activities, setActivities] = useState([]);
   const accessToken = localStorage.getItem('accessToken');
   useEffect(() =>{
+    setAuthenticated(true)
     const getAtivities = async () => {
         try{
             const response = await API.get('/activity/current-month');
@@ -25,7 +26,7 @@ const Dashboard = () => {
         }
     }
     getAtivities();
-  },[]);
+  },[setAuthenticated]);
 
  
 

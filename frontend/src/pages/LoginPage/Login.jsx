@@ -29,6 +29,8 @@ const Login = () => {
         const response = await API.post('/authentication/login',{email,password});
         console.log(response.data.accessToken);
         localStorage.setItem('accessToken',response.data.accessToken);
+        localStorage.setItem('refreshToken',response.data.refreshToken);
+        console.log(response.data);
         // after successful authentication the used will be directed to the userHome component 
         setAuthenticated(true);
         toast.success("Successfully logged in!", {
@@ -45,7 +47,7 @@ const Login = () => {
     }
     catch(error){
         console.error(error);
-        alert('Failed to login');
+        alert(`Failed to login, error: ${error}`);
     }  // end try catch block
     
   }

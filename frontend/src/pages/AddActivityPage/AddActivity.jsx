@@ -71,6 +71,9 @@ const AddActivity = () => {
             }
             const response = await API.post('/activity', { type, carbonEmission: emission });
             console.log(response.data);
+            if(response.status === 401){
+                console.log("Acces Token has been expired")
+            }
             toast.success("Added New Actitvity!", {
               position: "top-right",
               autoClose: 5000,
@@ -85,7 +88,8 @@ const AddActivity = () => {
             setCarbonEmission(0);
             setPowerWatt(0);
             setHours(0);
-        } catch (error) {
+        } 
+        catch (error) {
             console.error(error);
             alert('Failed to add activity');
             toast.error('Failed to add activity', {

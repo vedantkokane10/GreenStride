@@ -12,6 +12,7 @@ const Leaderboard = () => {
     const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
+        setAuthenticated(true);
         const getLeaderboardUsers = async () => {
             try {
                 const response = await API.get('/activity/leaderboard');
@@ -27,7 +28,7 @@ const Leaderboard = () => {
         };
         
         getLeaderboardUsers();
-    }, [accessToken]);
+    }, [setAuthenticated]);
 
     if (loading) return <p style={{color:"black"}}>Loading...</p>;
     if (error) return <p style={{color:"black"}}>{error}</p>;

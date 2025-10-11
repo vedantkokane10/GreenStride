@@ -10,22 +10,16 @@ import blogRoutes from './routes/BlogRoutes/blog.routes.js'
 
 import { rateLimit } from "express-rate-limit";
 
+import User from "./models/UserModel/user.model.js";
+import Activity from "./models/ActivityModel/activity.model.js";
+
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
 const PORT = 8000;
-
-// connecting to mongodb database
-connectDB(); 
-
-
-// connecting to postgresSQL database
-pool.connect()
-  .then(() => console.log('Connected to the PostgresSQL database'))
-  .catch((err) => console.error('Error connecting to the database:', err));
-
 
 
 // rate limititing to avoid DoS attack (15 mins => 100 requests) 
@@ -53,6 +47,31 @@ app.use('/api/activity',activityRoutes);
 
 app.use('/api/blog', blogRoutes);
 
-app.listen(PORT,function(){
-    console.log("App started at " + PORT);
-})
+const main = async() =>{
+  try {
+    console.log("Server started at " + PORT);
+
+    // connecting to mongodb database
+    await connectDB(); 
+
+    // connecting to postgresSQL database
+    await pool.connect()
+    .then(() => console.log('Connected to the PostgresSQL database'))
+    .catch((err) => console.error('Error connecting to the database:', err));
+
+    // Initializing the Databases
+    User.initialize();
+    Activity.initialize();
+
+
+    console.log("All initial setup like connecting to Database creating tables and middleware things are carried out successfully.")
+
+
+  } 
+  catch (error) {
+    console.log(error);
+  }
+}
+
+
+app.listen(PORT, main)

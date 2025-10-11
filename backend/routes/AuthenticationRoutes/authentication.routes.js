@@ -1,5 +1,5 @@
 import express from "express";
-import {login, register} from "../../controllers/services/Auth/Auth.controller.js";
+import {login, register, generateNewAccesToken} from "../../controllers/services/Auth/Auth.controller.js";
 
 const router = express.Router();
 
@@ -20,5 +20,9 @@ router.post('/login',login);
 router.post('/register',register);
 
 
+// @description Generate a new access token
+// @route POST /refresh
+// @access public
+router.post('/refresh',generateNewAccesToken);
 
 export default router;

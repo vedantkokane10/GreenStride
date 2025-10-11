@@ -12,6 +12,7 @@ const GetSuggestions = () => {
   const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
+    setAuthenticated(true);
     const getSuggestions = async () => {
       try {
         const response = await API.get('/activity/suggestions');
@@ -27,7 +28,7 @@ const GetSuggestions = () => {
       }
     };
     getSuggestions();
-  }, [accessToken]);
+  }, [setAuthenticated]);
 
   return (
     // <div>

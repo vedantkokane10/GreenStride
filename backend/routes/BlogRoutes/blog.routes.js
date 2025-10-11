@@ -1,6 +1,6 @@
 import express from 'express';
-import {validateToken} from '../../middleware/JWT Token Handler/validateTokenHandler.js'
-import {handler} from '../../middleware/User Blog Handler/handler.js'
+import {validateToken} from '../../middleware/JWT Token Handler/validateTokenHandler.middleware.js'
+import {handler} from '../../middleware/User Blog Handler/handler.middleware.js'
 import {addBlog, updateBlog, deleteBlog, getBlogs, getAllBlogs} from '../../controllers/services/Blog/Blog.controller.js';
 
 const router = express.Router();

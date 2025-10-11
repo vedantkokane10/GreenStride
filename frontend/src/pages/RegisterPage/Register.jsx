@@ -31,6 +31,7 @@ const Register = () => {
     try{
         const response = await API.post('authentication/register',{userName,email,password});
         localStorage.setItem('accessToken',response.data.accessToken);
+        localStorage.setItem('refreshToken',response.data.refreshToken);
         setAuthenticated(true);
         navigate('/userHome');
     }

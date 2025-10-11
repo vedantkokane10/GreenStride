@@ -21,10 +21,14 @@ const validateToken = asyncHandler(async (req, res, next) => {
             next();
         } 
         catch (err) {
+            if (err.name === "TokenExpiredError") {
+                return res.status(401).json({ "Message": "Access token expired" });
+            }
             console.log("Token validation failed:", err.message);
-            res.status(403).json({ "Message": "User not registered" });
+            return res.status(403).json({ "Message": "User not registered" });
         }
-    } else {
+    } 
+    else {
         console.log("Token not provided");
         res.status(403).json({ "Message": "Token not provided" });
     }
