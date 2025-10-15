@@ -1,5 +1,6 @@
 import Activity from '../../../models/ActivityModel/activity.model.js';
-
+import {ApiResponse} from '../../../utils/ApiResponse.util.js';
+import {ApiError} from '../../../utils/ApiError.util.js';
 Activity.initialize();
 
 const getLeaderboard = async (req,res) => {
@@ -10,10 +11,11 @@ const getLeaderboard = async (req,res) => {
         console.log(date);
         console.log(currentMonth);
         console.log(activities);
-        return res.json(activities);
+        return res.status(201).json(new ApiResponse(activities, 'Leaderboard fetched successfully', 201, true));
     } catch (error) {
-        console.error('Error fetching leaderboard:', error);
-        throw error; // Re-throw the error to handle it in the route/controller
+        // console.error('Error fetching leaderboard:', error);
+        // throw error;
+        throw new ApiError(500, "Server error while fetching leaderboard");
     }
 };
 

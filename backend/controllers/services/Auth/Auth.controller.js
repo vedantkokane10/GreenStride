@@ -3,7 +3,8 @@ import jwt from "jsonwebtoken";
 import asyncHandler from 'express-async-handler';
 import User from "../../../models/UserModel/user.model.js";
 import dotenv from 'dotenv';
-
+import {ApiResponse} from '../../../utils/ApiResponse.util.js';
+import {ApiError} from '../../../utils/ApiError.util.js';
 dotenv.config();
 
 
@@ -45,17 +46,20 @@ const login = asyncHandler(async (req, res) => {
                 console.log("Error updating refresh token")
                 throw Error;
             }
+            let result = {accessToken, refreshToken}
+            return res.status(200).json(new ApiResponse(result, 'User logged in successfully', 200, true));
 
-
-            return res.status(200).json({ "Message": "User logged in successfully", accessToken, refreshToken });
+            //return res.status(200).json({ "Message": "User logged in successfully", accessToken, refreshToken });
         } 
         else {
-            return res.status(403).json({ "Message": "Invalid email or password" });
+            return res.status(403).json(new ApiResponse({}, 'Invalid email or password', 403, false));
+            //return res.status(403).json({ "Message": "Invalid email or password" });
         }
     }
     catch(error){
         console.log(error.message);
-        res.status(500).json({ "Message": "Error on server side while logging in" });
+        throw new ApiError(500, "Error on server side while logging in");
+        //res.status(500).json({ "Message": "Error on server side while logging in" });
     }
 });
 
@@ -91,11 +95,14 @@ const register = asyncHandler(async (req, res) => {
             throw Error;
         }
 
-        return res.status(200).json({ "Message": "Registered user successfully", accessToken, refreshToken });
+        let result = {accessToken, refreshToken}
+        return res.status(200).json(new ApiResponse(result, 'User Registered in successfully', 200, true));
+        // return res.status(200).json({ "Message": "Registered user successfully", accessToken, refreshToken });
 
     }
     catch(error){
-        return res.status(500).json({ "Message": "Error on server side while registering the user" });
+        throw new ApiError(500, "Error on server side while registering the user");
+        //return res.status(500).json({ "Message": "Error on server side while registering the user" });
     }
 });
 
@@ -135,19 +142,24 @@ const generateNewAccesToken = async(req,res) =>{
             const accessToken = jwt.sign({
                 user: { email }
             }, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
-            return res.status(200).json({ "Message": "New Access Token Generated", accessToken, refreshToken }); 
+            let result = {accessToken, refreshToken}
+            return res.status(200).json(new ApiResponse(result, 'New Access Token Generated', 200, true));
+           // return res.status(200).json({ "Message": "New Access Token Generated", accessToken, refreshToken }); 
         }
         else{
-            return res.status(401).json({"Message":"Refresh token expired"});
+            return res.status(200).json(new ApiResponse(result, 'Refresh token expired', 200, true));
+
+           // return res.status(401).json({"Message":"Refresh token expired"});
         }
     } 
     catch (error) {
-        return res.status(500).json({ "Message": "Error on server side while logging the user" });
+        throw new ApiError(500, "Error on server side while logging the user");
+        //return res.status(500).json({ "Message": "Error on server side while logging the user" });
     }
 }
 
 const getUserData = asyncHandler(async (req, res) => {
-    const { email } = req.user; // assuming email is decoded from token
+    const { email } = req.user; //  email is decoded from token by middleware
     const user = await User.findUser(email);
     res.json(user);
 });

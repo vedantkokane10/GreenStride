@@ -17,7 +17,7 @@ const Leaderboard = () => {
             try {
                 const response = await API.get('/activity/leaderboard');
                 console.log(response.data);
-                setLeaderboardUsers(response.data);
+                setLeaderboardUsers(response.data.result);
 
             } catch (error) {
                 setError('Failed to fetch leaderboard data');

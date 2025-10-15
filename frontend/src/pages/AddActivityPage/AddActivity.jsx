@@ -70,7 +70,7 @@ const AddActivity = () => {
                 emission = (powerWatt / 1000) * hours;
             }
             const response = await API.post('/activity', { type, carbonEmission: emission });
-            console.log(response.data);
+            console.log(response.data.newActivity);
             if(response.status === 401){
                 console.log("Acces Token has been expired")
             }

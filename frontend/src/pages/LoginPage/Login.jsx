@@ -27,9 +27,9 @@ const Login = () => {
     event.preventDefault();
     try{
         const response = await API.post('/authentication/login',{email,password});
-        console.log(response.data.accessToken);
-        localStorage.setItem('accessToken',response.data.accessToken);
-        localStorage.setItem('refreshToken',response.data.refreshToken);
+        console.log(response.data.result.accessToken);
+        localStorage.setItem('accessToken',response.data.result.accessToken);
+        localStorage.setItem('refreshToken',response.data.result.refreshToken);
         console.log(response.data);
         // after successful authentication the used will be directed to the userHome component 
         setAuthenticated(true);

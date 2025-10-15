@@ -30,8 +30,8 @@ const Register = () => {
     event.preventDefault(); // to prevent reloading
     try{
         const response = await API.post('authentication/register',{userName,email,password});
-        localStorage.setItem('accessToken',response.data.accessToken);
-        localStorage.setItem('refreshToken',response.data.refreshToken);
+        localStorage.setItem('accessToken',response.data.result.accessToken);
+        localStorage.setItem('refreshToken',response.data.result.refreshToken);
         setAuthenticated(true);
         navigate('/userHome');
     }

@@ -3,7 +3,8 @@ import Activity from '../../../models/ActivityModel/activity.model.js';
 import User from '../../../models/UserModel/user.model.js';
 import Groq from 'groq-sdk';
 import dotenv from 'dotenv';
-
+import {ApiResponse} from '../../../utils/ApiResponse.util.js';
+import {ApiError} from '../../../utils/ApiError.util.js';
 dotenv.config();
 
 
@@ -39,33 +40,34 @@ const addActivity = asyncHandler(async (req, res) => {
     try {
         const date = new Date();
         const todaysDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-        // const activity = {
-        //     email:userData.email,
-        //     type:emissionType, 
-        //     carbonEmission:totalEmission, 
-        //     dateAdded:todaysDate 
-        // };
 
         const activity = {
-            email: userData.email,          // Correctly map email
-            type: emissionType,            // Map emissionType to type
-            carbonEmission: totalEmission, // Map totalEmission
-            dateAdded: todaysDate          // Map today's date
+            email: userData.email,          
+            type: emissionType,           
+            carbonEmission: totalEmission, 
+            dateAdded: todaysDate        
         };
         console.log(activity);
         const newActivity = await Activity.addActivity(activity);
-        res.status(201).json({ message: 'Activity added successfully', activity: newActivity });
+
+        return res.status(201).json(new ApiResponse(newActivity, 'Activity added successfully', 201, true));
+        //res.status(201).json({ message: 'Activity added successfully', activity: newActivity });
     } 
     catch (error) {
-        res.status(500).json({ message: 'Server error', error: error.message });
+        throw new ApiError(500, "Server error while adding activity");
+        // res.status(500).json({ message: 'Server error', error: error.message });
     }
 });
 
 const getActivites = asyncHandler(async (req,res) => {
-    console.log(req.user.email);
-    const activities = await Activity.getAllActivities(req.user.email);
-    //console.log(activities)
-    return res.json(activities);
+    try {
+        console.log(req.user.email);
+        const activities = await Activity.getAllActivities(req.user.email); 
+        return res.status(201).json(new ApiResponse(activities, 'Activity fetched successfully', 201, true));
+    } 
+    catch (error) {
+        throw new ApiError(500, "Server error while fetching activities");
+    }
 });
 
 
@@ -76,32 +78,36 @@ const getActivitesByDate = asyncHandler(async (req,res) => {
     const activities = await Activity.getAllActivities(req.user.email,currentMonth);
     //console.log(activities)
     console.log(activities);
-    return res.json(activities);
+    return res.status(201).json(new ApiResponse(activities, 'Activity fetched successfully', 201, true));
 });
 
 
 const getActivitesByCategory = asyncHandler(async (req,res) => {
-    const activities = await Activity.getAllActivitiesByType(req.user.email);
-    const category = {
-        'carTravel': 0.0,           // kg CO₂e per km (petrol car)
-        'electricity': 0.0,         // kg CO₂e per kWh
-        'lpgUsage': 0.0,            // kg CO₂e per kg of LPG
-        'airTravel': 0.0,           // kg CO₂e per km (domestic flights)
-        'riceConsumption': 0.0,      // kg CO₂e per kg of rice
-        'busTravel': 0.0,           // kg CO₂e per km
-        'trainTravel': 0.0,         // kg CO₂e per km
-        'twoWheelerTravel': 0.0,   // kg CO₂e per km
-        'milkConsumption': 0.0,      // kg CO₂e per liter of milk
-        'waste': 0.0                // kg CO₂e per kg of waste
-    }
-    console.log(activities)
-    for(var activity of activities){
-        if (category.hasOwnProperty(activity.type)) { 
-            category[activity.type] = activity.totalemission;
+    try {
+        const activities = await Activity.getAllActivitiesByType(req.user.email);
+        const category = {
+            'carTravel': 0.0,           // kg CO₂e per km (petrol car)
+            'electricity': 0.0,         // kg CO₂e per kWh
+            'lpgUsage': 0.0,            // kg CO₂e per kg of LPG
+            'airTravel': 0.0,           // kg CO₂e per km (domestic flights)
+            'riceConsumption': 0.0,      // kg CO₂e per kg of rice
+            'busTravel': 0.0,           // kg CO₂e per km
+            'trainTravel': 0.0,         // kg CO₂e per km
+            'twoWheelerTravel': 0.0,   // kg CO₂e per km
+            'milkConsumption': 0.0,      // kg CO₂e per liter of milk
+            'waste': 0.0                // kg CO₂e per kg of waste
         }
+        console.log(activities)
+        for(var activity of activities){
+            if (category.hasOwnProperty(activity.type)) { 
+                category[activity.type] = activity.totalemission;
+            }
+        }
+        return res.status(201).json(new ApiResponse(category, 'Category wise Activities fetched successfully', 201, true));
+    } 
+    catch (error) {
+        throw new ApiError(500, "Server error while fetching Category wise Activities");
     }
-    console.log(category)
-    return res.json(category);
 });
 
 
@@ -186,7 +192,8 @@ async function main(email) {
 
         return fullMessage;
 
-    } catch (error) {
+    } 
+    catch (error) {
         console.error('Error during AI request:', error.message);
     }
 }
@@ -229,11 +236,13 @@ const getActivities = async (req,res) =>{
         response.statusCode = 200;
         response.success = true;
 
-        res.status(200).json(response);
+        //res.status(200).json(response);
+        return res.status(201).json(new ApiResponse(response, 'Activity fetched successfully', 201, true));
 
     }
     catch (error) {
-        res.status(500).json({ message: 'Server error', error: error.message });
+        throw new ApiError(500, "Server error while fetching activities");
+        //res.status(500).json({ message: 'Server error', error: error.message });
     }
 }
 

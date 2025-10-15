@@ -18,7 +18,8 @@ const Dashboard = () => {
         try{
             const response = await API.get('/activity/current-month');
             
-            setActivities(response.data);
+            setActivities(response.data.result);
+            console.log(response.data);
             console.log(activities);
         }
         catch(error){

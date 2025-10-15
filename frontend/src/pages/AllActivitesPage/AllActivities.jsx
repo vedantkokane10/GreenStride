@@ -102,9 +102,10 @@ const AllActivities = () => {
     const getActivities = async () => {
       try {
         const response = await API.get(url);
-        setActivities(response.data.result);
-        setNextPage(response.data.next ? response.data.next.url.replace("/api", "") : null);
-        setPrevPage(response.data.previous ? response.data.previous.url.replace("/api", "") : null);
+        console.log(response.data);
+        setActivities(response.data.result.result);
+        setNextPage(response.data.result.result.next ? response.data.next.url.replace("/api", "") : null);
+        setPrevPage(response.data.resul.result.previous ? response.data.previous.url.replace("/api", "") : null);
       } catch (error) {
         console.error("Error fetching activities:", error);
       }
