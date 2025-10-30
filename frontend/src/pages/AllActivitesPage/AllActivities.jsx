@@ -94,7 +94,7 @@ const AllActivities = () => {
   const [prevPage, setPrevPage] = useState(null);
 
   // Start with base URL
-  const [url, setUrl] = useState("/activity?limit=5");
+  const [url, setUrl] = useState("/activity?limit=3");
 
   useEffect(() => {
     setAuthenticated(true);
@@ -102,10 +102,11 @@ const AllActivities = () => {
     const getActivities = async () => {
       try {
         const response = await API.get(url);
-        console.log(response.data);
-        setActivities(response.data.result.result);
-        setNextPage(response.data.result.result.next ? response.data.next.url.replace("/api", "") : null);
-        setPrevPage(response.data.resul.result.previous ? response.data.previous.url.replace("/api", "") : null);
+        let result = response.data.result;
+        console.log(result);
+        setActivities(result.result);
+        setNextPage(result.next ? result.next.url.replace("/api", "") : null);
+        setPrevPage(result.previous ? result.previous.url.replace("/api", "") : null);
       } catch (error) {
         console.error("Error fetching activities:", error);
       }

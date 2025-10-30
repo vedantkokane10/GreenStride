@@ -27,6 +27,8 @@ const Navbar = () => {
               <Link to="/dashboard" className="nav-link">Dashboard</Link>
               <Link to="/suggestion" className="nav-link">Get Suggestions</Link>
               <Link to="/Leaderboard" className="nav-link">Leaderboard</Link>
+              <Link to="/addblog" className="nav-link">Add Blog</Link>
+              <Link to="/getBlogs" className="nav-link">Blogs</Link>
               </>)
             :
               (<>

@@ -47,22 +47,32 @@ const verifyBlog = async(content) =>{
 
 const addBlog = async (req,res) =>{
     try{
-        const {title,email,content} = req.body;
-        var exists = await Blog.findOne({email,title});
+        console.log("Executing add blog controller");
+        const {title,content,email, username} = req.body;
+        const data = {
+            userName:username,
+            email: email,
+            title:title,
+            content:content
+        }
+        console.log(data);
+        const exists = await Blog.findOne({ email, title }); 
         if(exists){
+            console.log("Blog with given title already exists give a new title");
             return res.json({message:"Blog with given title already exists give a new title", added:"false"});
         }
-        const userName = req.user; 
-        console.log(req.body);
+        console.log("The blog is new one and does not exists")
+        
         const verified = await verifyBlog(content);
-        console.log(verified);
+        console.log("Blog verified successfully - ",verified);
         if(verified === false){
             return res.json({message:"Sorry, your blog content does not meet the criteria of the GreenStride.", added:"false"});
         }
-        const newBlog = await Blog.create({
-            userName,title,email,content
-        });
-        return res.status(201).json({ message: "Blog created successfully", Blog: newBlog, added:"false" });
+
+        
+        const newBlog = await Blog.create(data);
+        console.log("Added new blog - ",newBlog);
+        return res.status(201).json({ message: "Blog created successfully", Blog: newBlog, added:"true" });
     }
     catch(e){
         console.log(e);

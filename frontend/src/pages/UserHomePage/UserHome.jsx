@@ -4,6 +4,7 @@ import '../../styles/userHomeStyle.css';
 import carbonEarth2 from '../../assets/carbonEarth2.png';
 import {AuthContext} from '../../context/AuthContext';
 import Leaderboard from '../LeaderboardPage/Leaderboard';
+import { useEffect } from 'react';
 
 
 const UserHome = () => {
@@ -24,6 +25,11 @@ const UserHome = () => {
   const leaderboard = () => {
     navigate('/leaderboard');
   };
+
+  useEffect(() =>{
+    setAuthenticated(true);
+  }, [setAuthenticated])
+
   return (
     <div className='page-content'>
       <div className='image-part'>

@@ -14,7 +14,8 @@ import  Leaderboard  from './pages/LeaderboardPage/Leaderboard';
 import AddBlogPage from './pages/AddBlogPage/AddBlogPage';
 import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import GetAllBlogs from './pages/GetAllBlogs/GetAllBlogs'
+//import AddBlogPage from './pages/AddBlogPage/AddBlogPage';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
             <Route exact path="/suggestion" element={<GetSuggestions />} />
             <Route exact path="/leaderboard" element={<Leaderboard />} />
             <Route exact path="/addblog" element={<AddBlogPage />} />
+            <Route exact path='/getBlogs' element={<GetAllBlogs />}/>
           </Routes>
         </div>
       </Router>
