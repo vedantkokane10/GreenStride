@@ -27,7 +27,7 @@ export const successfulResponse = (response) => {
 export const expiredAccessTokenResponse = async (error) => {
     const originalRequest = error.config;
     console.log("Request failed:", originalRequest.url, error.response?.status);
-    console.log("Original request data:", originalRequest.data); // Check what's in the body
+    console.log("Original request data:", originalRequest.data); // body checking
   
     if ((error.response?.status === 401 || error.response?.status === 403) && !originalRequest._retry) {
       console.log("Attempting token refresh...");

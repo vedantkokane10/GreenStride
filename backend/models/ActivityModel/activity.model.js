@@ -10,6 +10,7 @@ class Activity {
           type VARCHAR(255) NOT NULL,
           carbonEmission FLOAT NOT NULL,
           dateAdded DATE NOT NULL,
+          country varchar(255),
           CONSTRAINT fk_user_email FOREIGN KEY (email) 
             REFERENCES Users(email) ON DELETE CASCADE
         );
@@ -20,12 +21,12 @@ class Activity {
     }
   }
 
-  static async addActivity({ email, type, carbonEmission, dateAdded }) {
+  static async addActivity({ email, type, carbonEmission, country, dateAdded }) {
     try {
       const result = await pool.query(
-        `INSERT INTO Activity (email, type, carbonEmission, dateAdded) 
-         VALUES ($1, $2, $3, $4) RETURNING *;`,
-        [email, type, carbonEmission, dateAdded]
+        `INSERT INTO Activity (email, type, carbonEmission, country, dateAdded) 
+         VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+        [email, type, carbonEmission, country, dateAdded]
       );
       console.log("Activity added successfully:", result.rows[0]);
       return result.rows[0];
@@ -81,16 +82,18 @@ class Activity {
     }
   }
 
-  static async getLeaderboard(month) {
+  static async getLeaderboard(month,country) {
     try {
       const result = await pool.query(
-        `SELECT u1.userName, SUM(a1.carbonEmission) AS totalEmission 
+        `/* This SQL query is retrieving data for a leaderboard based on the total carbon emissions of
+        users in a specific month and country. Here's a breakdown of the query: */
+        SELECT u1.userName, SUM(a1.carbonEmission) AS totalEmission 
          FROM Activity a1 
          INNER JOIN Users u1 ON a1.email = u1.email 
-         WHERE EXTRACT(MONTH FROM a1.dateAdded) = $1 
+         WHERE EXTRACT(MONTH FROM a1.dateAdded) = $1 and a1.country = $2 
          GROUP BY u1.userName 
          ORDER BY totalEmission ASC;`,
-        [month]
+        [month, country]
       );
       return result.rows;
     } catch (error) {

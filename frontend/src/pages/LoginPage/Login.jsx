@@ -48,7 +48,7 @@ const Login = () => {
     catch(error){
         console.error(error);
         alert(`Failed to login, error: ${error}`);
-    }  // end try catch block
+    } 
     
   }
   return (

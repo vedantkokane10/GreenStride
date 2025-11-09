@@ -1,82 +1,139 @@
 .addBlogContainer {
-    padding: 40px;
-    color: black;
-    font-family: Arial, sans-serif;
-}
-
-.addBlogContainer {
-    padding: 40px;
-    color: black;
-    font-family: Arial, sans-serif;
-
-    /* Make full screen */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: calc(100vh - 80px);
     width: 100%;
-    min-height: 100vh;
-
-    /* Remove the box effect */
+    padding: 40px 20px;
+    font-family: "Inter", Arial, sans-serif;
+    color: #111;
     background: none;
-    box-shadow: none;
-}
-.addBlogForm {
-    width: 80%;
-    max-width: 100%; /* Remove restriction */
-    box-shadow: none;
-    padding: 0; /* Remove padding around */
 }
 
+.addBlogHeading {
+    font-size: 2.0rem;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    color: #111;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.addBlogForm {
+    width: 100%;
+    max-width: 750px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+}
+
+.addBlogForm:hover {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.formGroup {
+    margin-bottom: 25px;
+}
 
 .addBlogForm label {
     display: block;
-    margin-top: 15px;
-    font-weight: bold;
-    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #111;
+    font-size: 16px;
 }
 
 .addBlogForm input,
 .addBlogForm textarea {
     width: 100%;
-    color: black;
-    padding: 12px;
-    margin-top: 8px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    /* color: black; */
+    color: #222;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+    font-size: 15px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    font-family: "Inter", Arial, sans-serif;
+}
 
-    transition: border 0.3s ease;
+.addBlogForm input::placeholder,
+.addBlogForm textarea::placeholder {
+    color: #999;
 }
 
 .addBlogForm input:focus,
 .addBlogForm textarea:focus {
-    border: 1px solid #2ecc71;
+    border: 2px solid #2ecc71;
+    box-shadow: 0 0 8px rgba(46, 204, 113, 0.25);
     outline: none;
-    /* background-color: #fff; */
 }
 
 .addBlogForm textarea {
-    /* min-height: 250px;
-    resize: vertical; */
+    resize: vertical;
+    min-height: 220px;
+    line-height: 1.6;
 }
 
-
-.formButton{
-    margin-top: 20px;
+.formButton {
+    align-self: center;
+    margin-top: 10px;
     color: black;
     background-color: white;
-    width: 80px;
-    height: 30px;
-    border-radius: 25px;
-    padding: 5px;
+    width: 160px;
+    height: 48px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 2px solid black;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.formButton:hover{
-    cursor: pointer;
+.formButton:hover {
     background-color: black;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
+.formButton:active {
+    transform: translateY(0);
+}
 
-button {
-    border: 1px solid black;
+@media (max-width: 768px) {
+    .addBlogContainer {
+        padding: 20px 15px;
+        min-height: calc(100vh - 60px);
+    }
+
+    .addBlogForm {
+        width: 100%;
+        max-width: 100%;
+        padding: 30px 20px;
+    }
+
+    .addBlogHeading {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+
+    .formButton {
+        width: 140px;
+        height: 45px;
+        font-size: 15px;
+    }
+
+    .addBlogForm input,
+    .addBlogForm textarea {
+        font-size: 14px;
+        padding: 12px 14px;
+    }
 }

@@ -6,9 +6,6 @@ import { AuthContext } from '../../context/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
-
 const emissionFactors = {
     "carTravel": 0.18,           // kg CO₂e per km (petrol car)
     "electricity": 0.82,         // kg CO₂e per kWh

@@ -29,6 +29,7 @@ const Navbar = () => {
               <Link to="/Leaderboard" className="nav-link">Leaderboard</Link>
               <Link to="/addblog" className="nav-link">Add Blog</Link>
               <Link to="/getBlogs" className="nav-link">Blogs</Link>
+              <Link to="/profile" className="nav-link">Profile</Link>
               </>)
             :
               (<>

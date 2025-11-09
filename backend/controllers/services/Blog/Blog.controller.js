@@ -1,6 +1,7 @@
 import Groq from 'groq-sdk';
 import Blog from '../../../models/BlogModel/blog.model.js';
 import dotenv from 'dotenv';
+import { ApiResponse } from '../../../utils/ApiResponse.util.js';
 
 dotenv.config();
 
@@ -11,11 +12,28 @@ const groq = new Groq({
 async function main(content) {
     try {
 
-        let prompt = "Here is a blog content given by user of my carbon footprint app:\n\n";
-        prompt += `${content} \n`;
-        prompt += "\nDecide if this content is related to climate change, sustainability or carbon footprint or anything related to enviornment. " +
-          "Return only 'true' if it is relevant and non-offensive, 'false' otherwise. " +
-          "No extra words, just true or false.";
+        // let prompt = "Here is a blog content given by user of my carbon footprint app:\n\n";
+        // prompt += `${content} \n`;
+        // prompt += "\nDecide if this content is related to climate change, sustainability or carbon footprint or anything related to enviornment. " +
+        //   "Return only 'true' if it is relevant and non-offensive, 'false' otherwise. " +
+        //   "No extra words, just true or false.";
+
+        const prompt = `You are a content moderator for an environmental app. Analyze this user-submitted blog content:
+
+        "${content}"
+
+        Evaluate based on these criteria:
+        1. Is the MAIN topic about climate change, sustainability, carbon footprint, or environmental issues?
+        2. Is the content free from profanity, offensive language, or spam?
+        3. Does it provide meaningful information or discussion (not just keywords mixed with nonsense)?
+
+        Rules:
+        - Content with curse words, insults, or offensive language = false
+        - Content that's primarily spam, nonsense, or promotional = false
+        - Content where environmental terms are just sprinkled into irrelevant text = false
+        - Only genuine environmental content that's respectful = true
+
+        Respond with ONLY "true" or "false". No explanation.`;
 
         const chatCompletion = await groq.chat.completions.create({
             "messages":[
@@ -59,20 +77,32 @@ const addBlog = async (req,res) =>{
         const exists = await Blog.findOne({ email, title }); 
         if(exists){
             console.log("Blog with given title already exists give a new title");
-            return res.json({message:"Blog with given title already exists give a new title", added:"false"});
+            //return res.json({message:"Blog with given title already exists give a new title", added:"false"});
+            let result = {
+                added:false
+            }
+            return res.status(409).json(new ApiResponse(result, "Blog with given title already exists give a new title",409,false))
         }
         console.log("The blog is new one and does not exists")
         
         const verified = await verifyBlog(content);
         console.log("Blog verified successfully - ",verified);
         if(verified === false){
-            return res.json({message:"Sorry, your blog content does not meet the criteria of the GreenStride.", added:"false"});
+            //return res.json({message:"Sorry, your blog content does not meet the criteria of the GreenStride.", added:"false"});
+            let result = {
+                added:false
+            }
+            return res.status(422).json(new ApiResponse(result, "Sorry, your blog content does not meet the criteria of the GreenStride",422,false))
         }
 
         
         const newBlog = await Blog.create(data);
         console.log("Added new blog - ",newBlog);
-        return res.status(201).json({ message: "Blog created successfully", Blog: newBlog, added:"true" });
+        //return res.status(201).json({ message: "Blog created successfully", Blog: newBlog, added:"true" });
+        let result = {
+            added:true
+        }
+        return res.status(201).json(new ApiResponse(result, "Blog created successfully",201,true))
     }
     catch(e){
         console.log(e);
@@ -147,20 +177,63 @@ const deleteBlog = async (req,res) =>{
 
 const getBlogs = async (req,res) =>{
     try{
+        let page = req.query.page || 1;
+        let limit = req.query.limit || 5;
         const allBlogs = await Blog.find({email:req.body.email});
-        return res.json(allBlogs);
+        let response = {};
+        let startIndex = page-1;
+        let lastIndex = page * limit;
+        let size = allBlogs.length;
+        const result = allBlogs.slice(startIndex, lastIndex);
+        response.result = result;
+        if(startIndex > 0){
+            response.previous = {
+                'url': `${req.baseUrl}?page=${page-1}&limit=${limit}`
+            }
+        }
+
+        if(lastIndex < size){
+            response.next = {
+                'url': `${req.baseUrl}?page=${page+1}&limit=${limit}`
+            }
+        }
+        
+        return res.status(200).json(new ApiResponse(response, "Successfully fetched all the records", 200, true));  
     }
-    catch(e){
-        console.log(e);
-        const message = {"message":e};
+    catch(error){
+        console.log(error);
+        const message = {"message":error};
         return res.json(message)
     }
 };
 
 const getAllBlogs = async (req,res) =>{
     try{
+        let page = parseInt(req.query.page) || 1;
+        let limit = parseInt(req.query.limit) || 5;
         const allBlogs = await Blog.find();
-        return res.json(allBlogs);
+        let startIndex = page-1;
+        let lastIndex = page * limit;
+        let result = allBlogs.slice(startIndex, lastIndex);
+        let size = allBlogs.length
+        let response = {};
+
+        response.result = result;
+
+        if(startIndex > 0){
+            response.previous = {
+                'url':`${req.baseUrl}?page=${page-1}&limit=${limit}`
+            }
+        }
+
+        if(lastIndex < size){
+            response.next = {
+                'url':`${req.baseUrl}?page=${page+1}&limit=${limit}`
+            }
+        }
+
+        
+        return res.json(new ApiResponse(response, "Successfully fetched all the record", 200, true));
     }
     catch(e){
         console.log(e);

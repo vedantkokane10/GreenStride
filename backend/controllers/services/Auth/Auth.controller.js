@@ -16,28 +16,50 @@ const REFRESH_TOKEN_EXPIRY = process.env.JWT_REFRESH_TOKEN_EXPIRY;
 User.initialize();
 
 
+const countries = [
+    "USA",
+    "India",
+    "China",
+    "UK",
+    "Germany",
+    "France",
+    "Japan",
+    "Australia",
+    "Canada",
+    "Brazil",
+    "Norway",
+    "SouthAfrica",
+    "UAE",
+    "Netherlands",
+    "Singapore",
+    "SouthKorea",
+    "Mexico",
+]
+  
+
+
 const login = asyncHandler(async (req, res) => {
     try{
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(403).json({ "Message": "Please enter email and password" });
+            return res.status(403).json({ "Message": "Please enter email and password " });
         }
 
         const currentUser = await User.findUser(email);
         if (!currentUser) {
             return res.status(403).json({ "Message": "Invalid email or password" });
         }
-
+        const country = currentUser.country;
         const passwordMatch = await argon2.verify(currentUser.password, password);
         if (passwordMatch) {
             const accessToken = jwt.sign({
-                user: { email }
+                user: { email, country }
             }, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
             
 
             const refreshToken = jwt.sign({
-                user: { email }
+                user: { email, country }
             }, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRY });
 
 
@@ -66,27 +88,31 @@ const login = asyncHandler(async (req, res) => {
 
 const register = asyncHandler(async (req, res) => {
     try{
-        const { userName, email, password } = req.body;
+        const {userName, email, password, country} = req.body;
 
-        if (!userName || !email || !password) {
+        if (!userName || !email || !password || !country) {
             return res.status(403).json({ "Message": "Please enter all fields" });
         }
-    
+        
+        if(!countries.includes(country)){
+            return res.status(403).json({ "Message": "Sorry your country is not supported, currently we only support G20 Countries" });
+        }
+
         const userExists = await User.findUser(email);
         if (userExists) {
             return res.status(403).json({ "Message": "Email already exists" });
         }
     
         const hashedPassword = await argon2.hash(password);
-        await User.addUser({ userName, email, password: hashedPassword });
+        await User.addUser({ userName, email, password: hashedPassword, country });
     
         const accessToken = jwt.sign({
-            user: { email }
+            user: { email, country }
         }, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
         
 
         const refreshToken = jwt.sign({
-            user: { email }
+            user: { email, country }
         }, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRY });
 
 
@@ -115,10 +141,12 @@ const generateNewAccesToken = async(req,res) =>{
         }
 
         let email;
+        let country
         try {
             // verify the refresh token
             const decodedUser = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
             email = decodedUser.user.email;
+            country = decodedUser.user.country;
         } 
         catch (err) {
             if (err.name === "TokenExpiredError") {
@@ -140,7 +168,7 @@ const generateNewAccesToken = async(req,res) =>{
         }
         if(userData.refreshtoken === refreshToken){
             const accessToken = jwt.sign({
-                user: { email }
+                user: { email, country }
             }, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
             let result = {accessToken, refreshToken}
             return res.status(200).json(new ApiResponse(result, 'New Access Token Generated', 200, true));
@@ -161,6 +189,7 @@ const generateNewAccesToken = async(req,res) =>{
 const getUserData = asyncHandler(async (req, res) => {
     const { email } = req.user; //  email is decoded from token by middleware
     const user = await User.findUser(email);
+
     res.json(user);
 });
 

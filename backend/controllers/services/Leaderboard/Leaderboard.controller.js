@@ -6,8 +6,11 @@ Activity.initialize();
 const getLeaderboard = async (req,res) => {
     try {
         const date = new Date();
+        const country = req.user.country;
+
         const currentMonth = date.getMonth() + 1; // month is based on 0-based index
-        const activities = await Activity.getLeaderboard(currentMonth);
+        const activities = await Activity.getLeaderboard(currentMonth,country);
+        console.log(country);
         console.log(date);
         console.log(currentMonth);
         console.log(activities);

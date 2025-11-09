@@ -9,6 +9,7 @@ class User{
                     email VARCHAR(255) NOT NULL,
                     password VARCHAR(255) NOT NULL,
                     refreshToken varchar(255),
+                    country varchar(255) NOT NULL,
                     PRIMARY KEY (email)
                 );
             `);
@@ -19,12 +20,12 @@ class User{
     }
 
     static  addUser = async(user) =>{
-        const { userName, email, password } = user;
+        const { userName, email, password, country } = user;
         try {
             const result = await pool.query(`
-                INSERT INTO users (userName, email, password) 
-                VALUES ($1, $2, $3)
-            `, [userName, email, password]);
+                INSERT INTO users (userName, email, password,country) 
+                VALUES ($1, $2, $3, $4)
+            `, [userName, email, password, country]);
             console.log('Added new user:', result.rowCount);
         } catch (error) {
             console.error('Error adding user:', error);
@@ -68,6 +69,17 @@ class User{
         }
         catch (error) {
             
+        }
+    }
+
+    static updateCountry = async(email, country) =>{
+        try {
+            let result = pool.query(`update users set coutry = $2 where email = $1;`[email, country]); 
+            return result.rows[0];  
+        }
+        catch (error) {
+            console.error('Error updating country token  user:', error);
+            return null;
         }
     }
 };
