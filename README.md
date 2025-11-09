@@ -14,20 +14,23 @@
 
 ---
 
-## ✨ Features
+## ✨ Key Highlights
 
-- 🌏 **G20 Country Support**: Region-specific carbon emission calculations tailored to environmental data from G20 nations
-- 📝 **Activity Logging**: Log daily activities and calculate associated carbon emissions
-- 🤖 **AI-Powered Recommendations**: LLaMA3 model analyzes user patterns and generates personalized suggestions for reducing environmental impact
-- ✍️ **Blogging Platform**: Share carbon reduction strategies, sustainability tips, and experiences with the community
-- 📊 **Data Visualizations**: Interactive line and pie charts showing emission trends over time
-- 🏆 **Leaderboard**: Monthly rankings based on carbon footprint reduction to encourage participation
-- 🔐 **Secure Authentication**: JWT-based user authentication and session management
-- ⚡ **Real-time Processing**: Fast data handling with Node.js and Express.js backend
+- 🌏 **G20 Country Support with Region-Specific Data**: Built support for users in G20 countries to log daily activities and calculate carbon emissions using region-specific emission factors and environmental data researched from academic white papers and environmental studies.
+
+- 🤖 **AI-Powered Personalization**: Integrated LLaMA3 model to analyze user activity patterns and generate tailored suggestions for reducing carbon footprint based on regional sustainability options.
+
+- ✍️ **Centralized Blogging Platform**: Created a dedicated blogging platform where users can document carbon reduction efforts and share sustainability practices, providing a centralized space for environmental content previously scattered across Reddit and other forums.
+
+- 📊 **Interactive Visualizations & Gamification**: Developed interactive data visualizations (line and pie charts) and a leaderboard that ranks users by monthly emissions reduction to encourage participation and behavior change.
+
+- 🔐 **Secure & Scalable Deployment**: Deployed application on AWS EC2 with PostgreSQL database on AWS RDS, implementing JWT-based authentication for secure user sessions.
 
 ---
 
 ## 🧱 Tech Stack
+
+**MongoDB** • **PostgreSQL** • **Express.js** • **React.js** • **Node.js** • **LLaMA3** • **JWT** • **AWS RDS** • **AWS EC2**
 
 - **Frontend**: React.js  
 - **Backend**: Node.js, Express.js  
@@ -50,5 +53,11 @@
 ## 🎯 Problem Solved
 
 Environmental content creators often share carbon reduction insights across scattered platforms like Reddit without a centralized space. GreenStride addresses this by providing a dedicated blogging platform alongside personal tracking tools, creating a unified hub for sustainability-focused individuals.
+
+---
+
+## 📚 Research & Development
+
+Extensive research was conducted through academic white papers and environmental studies to ensure accurate, region-specific emission factors for G20 countries, making the carbon calculations reliable and scientifically grounded.
 
 ---
