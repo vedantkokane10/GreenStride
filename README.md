@@ -50,9 +50,15 @@
 
 ---
 
-## 🎯 Problem Solved
+## 🎯 Problems Solved
 
-Environmental content creators often share carbon reduction insights across scattered platforms like Reddit without a centralized space. GreenStride addresses this by providing a dedicated blogging platform alongside personal tracking tools, creating a unified hub for sustainability-focused individuals.
+- **Lack of Region-Specific Carbon Tracking**: Most carbon footprint calculators use generic metrics that don't account for regional differences in energy sources, transportation infrastructure, and environmental policies. GreenStride provides G20 country-specific emission factors based on academic research.
+
+- **No Personalized Guidance**: Users often don't know how to effectively reduce their carbon footprint. GreenStride uses AI to analyze individual patterns and provide tailored, actionable recommendations based on regional sustainability options.
+
+- **Scattered Environmental Content**: Environmental content creators share carbon reduction insights across scattered platforms like Reddit and forums without a centralized space. GreenStride provides a dedicated blogging platform alongside personal tracking tools, creating a unified hub for sustainability-focused individuals.
+
+- **Lack of Motivation & Accountability**: Without feedback and community engagement, users lose motivation to maintain eco-friendly habits. The interactive visualizations and competitive leaderboard encourage consistent participation and behavior change.
 
 ---
 
