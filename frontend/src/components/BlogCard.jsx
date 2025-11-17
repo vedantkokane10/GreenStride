@@ -10,7 +10,7 @@ const BlogCard = ({ title, description, author }) => {
         <h2 className="blog-title">{title}</h2>
         {/* <p className="blog-author">By {author}</p> */}
         <p className="blog-desc">{description}</p>
-        <button className="read-more" onClick={() => setIsOpen(true)}>
+        <button className="" onClick={() => setIsOpen(true)}>
           Read More →
         </button>
       </div>

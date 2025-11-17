@@ -190,6 +190,11 @@
 
   .blog-desc {
     font-size: 0.95rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* ← number of lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: 0px;
   }
 
   .modal-content {

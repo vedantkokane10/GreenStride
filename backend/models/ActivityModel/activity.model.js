@@ -43,7 +43,8 @@ class Activity {
         [email]
       );
       return result.rows;
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error getting all activities:", error);
       return [];
     }

@@ -2,38 +2,76 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {AuthContext} from '../../context/AuthContext';
 import '../../styles/profileStyles.css'
+import API from '../../utils/api';
+import {BlogCardProfile} from '../../components/BlogCardProfile';
+
+
+
+const countries = [
+  { name: "USA", flag: "🇺🇸" },
+  { name: "India", flag: "🇮🇳" },
+  { name: "China", flag: "🇨🇳" },
+  { name: "UK", flag: "🇬🇧" },
+  { name: "Germany", flag: "🇩🇪" },
+  { name: "France", flag: "🇫🇷" },
+  { name: "Japan", flag: "🇯🇵" },
+  { name: "Australia", flag: "🇦🇺" },
+  { name: "Canada", flag: "🇨🇦" },
+  { name: "Brazil", flag: "🇧🇷" },
+  { name: "Norway", flag: "🇳🇴" },
+  { name: "South Africa", flag: "🇿🇦" },
+  { name: "UAE", flag: "🇦🇪" },
+  { name: "Netherlands", flag: "🇳🇱" },
+  { name: "Singapore", flag: "🇸🇬" },
+  { name: "South Korea", flag: "🇰🇷" },
+  { name: "Mexico", flag: "🇲🇽" },
+];
+
 
 const Profile = () => {
   const { setAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
+
   const [profileData, setProfileData] = useState({
     name: '',
     email: '',
-    bio: '',
-    carbonGoal: ''
+    country:''
   });
 
+  const [coutryChanged, setCoutryChanged] = useState(false);
 
-  const user = {
-    name:"jojo",
-    email:"test@",
-    bio:"hssh",
-    carbonGoal:"sjsj"
+  const [blogs, setBlogs] = useState([]);
 
-  }
+  
   useEffect(() => {
-    
-    setAuthenticated(true);
-   if (user) {
-      // Load user data from context or API
-      setProfileData({
-        name: user.name || '',
-        email: user.email || '',
-        bio: user.bio || '',
-        carbonGoal: user.carbonGoal || ''
-      });
+   setAuthenticated(true);
+   const fetchUserData = async() =>{
+      try {
+        const response = await API.get('/authentication/user');
+        console.log(response);
+        setProfileData({
+          name: response.data.result.username || '',
+          email: response.data.result.email|| '',
+          country: response.data.result.country || '',
+        });
+      } 
+      catch (error) {
+        console.log("Error fetching current user",error)
+      }
+   }
+   const fetchUserBlogs = async() =>{
+    try {
+      const response = await API.get('/blog/user-blogs');
+      setBlogs(response.data.result.result);
+      console.log(response.data.result.result);
+    } 
+    catch (error) {
+      console.log("Error fetching current user's blogs",error)
     }
+ }
+   fetchUserData();
+   fetchUserBlogs();
     
   }, [setAuthenticated, navigate]);
 
@@ -44,11 +82,37 @@ const Profile = () => {
     });
   };
 
+  const changeCountry = async(event) =>{
+    try {
+      setCoutryChanged(true);
+      setProfileData(prev =>({
+        ...prev,
+        country:event.target.value
+      }))
+
+    } catch (error) {
+      
+    }
+  }
+  const updateCountry = async() =>{
+    try {
+      const response = await API.patch('/authentication/user', {country:profileData.country});  
+      if(response.status === 200){
+        alert("Updated country");
+        console.log(response);
+        setCoutryChanged(false);
+      }
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your API call to update profile here
+
     try {
-      // Example: await updateProfile(profileData);
+      
       setIsEditing(false);
       alert('Profile updated successfully!');
     } catch (error) {
@@ -65,102 +129,33 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      <div className="profile-card">
-        <div className="profile-header">
-          <div className="profile-avatar">
-            {profileData.name ? profileData.name.charAt(0).toUpperCase() : 'U'}
-          </div>
-          <h2>{profileData.name || 'User'}</h2>
-          <p className="profile-email">{profileData.email}</p>
+      
+      <div className='profile-container'>
+        <div className='profile-info'>
+          <h3>UserName - {profileData.name}</h3>
+          <h3>Email - {profileData.email}</h3>
+          <select name="country"  value={profileData.country} onChange={changeCountry} required>
+              <option value="">
+                select country
+              </option>
+              {
+                countries.map((country, index) =>(
+                  <option key={index} value={country.name}>{country.name} {country.flag}</option>
+                ))
+              }
+            </select>
+
+            {
+                coutryChanged ? <button  onClick={updateCountry}>Update country</button> : ''
+            }
         </div>
-
-        <div className="profile-content">
-          {isEditing ? (
-            <form onSubmit={handleSubmit} className="profile-form">
-              <div className="form-group">
-                <label>Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={profileData.name}
-                  onChange={handleChange}
-                  placeholder="Your name"
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={profileData.email}
-                  onChange={handleChange}
-                  placeholder="Your email"
-                  disabled
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Bio</label>
-                <textarea
-                  name="bio"
-                  value={profileData.bio}
-                  onChange={handleChange}
-                  placeholder="Tell us about yourself..."
-                  rows="4"
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Monthly Carbon Footprint Goal (kg CO₂)</label>
-                <input
-                  type="number"
-                  name="carbonGoal"
-                  value={profileData.carbonGoal}
-                  onChange={handleChange}
-                  placeholder="e.g., 500"
-                />
-              </div>
-
-              <div className="form-actions">
-                <button type="submit" className="btn-save">Save Changes</button>
-                <button 
-                  type="button" 
-                  className="btn-cancel"
-                  onClick={() => setIsEditing(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          ) : (
-            <div className="profile-info">
-              <div className="info-section">
-                <h3>About</h3>
-                <p>{profileData.bio || 'No bio added yet.'}</p>
-              </div>
-
-              <div className="info-section">
-                <h3>Carbon Goal</h3>
-                <p>{profileData.carbonGoal ? `${profileData.carbonGoal} kg CO₂/month` : 'No goal set'}</p>
-              </div>
-
-              <div className="profile-actions">
-                <button 
-                  className="btn-edit"
-                  onClick={() => setIsEditing(true)}
-                >
-                  Edit Profile
-                </button>
-                <button 
-                  className="btn-logout"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-          )}
+        
+        <div className='profile-blogs'>
+            {
+            blogs.map((blog, index) =>{
+              return <BlogCardProfile title={blog.title} content={blog.content} id={blog._id} /> 
+            })
+            }
         </div>
       </div>
     </div>

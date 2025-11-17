@@ -378,9 +378,10 @@ const addActivity = asyncHandler(async (req, res) => {
     const userName = userData.userName;
     
     try {
-        const date = new Date();
-        const todaysDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-        
+        // const date = new Date();
+       // const todaysDate = new Date().toLocaleDateString('en-CA');
+        //const todaysDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+        const todaysDate = new Date().toLocaleDateString('en-CA');
         const activity = {
             email: userData.email,          
             type: emissionType,           

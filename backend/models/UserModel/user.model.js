@@ -74,7 +74,7 @@ class User{
 
     static updateCountry = async(email, country) =>{
         try {
-            let result = pool.query(`update users set coutry = $2 where email = $1;`[email, country]); 
+            let result = await pool.query(`update users set country = $2 where email = $1;`,[email, country]); 
             return result.rows[0];  
         }
         catch (error) {

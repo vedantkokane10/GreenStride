@@ -114,15 +114,16 @@ const addBlog = async (req,res) =>{
 
 const updateBlog = async (req,res) =>{
     try{
+        const id = req.params.id;
         const {title,email,content, newTitle} = req.body;
         var updatedBlog;
         console.log(`title - ${title}, email - ${email}, content - ${content}, newTitle - ${newTitle}`)
-
+        
         // if title update
         if(content === undefined){
             console.log('Title of blog is updated');
             updatedBlog = await Blog.findOneAndUpdate(
-                {email, title}, // filter
+                {_id:id}, // filter
                 {title:newTitle}, // update
                 {new:true} // return the updated document
             );
@@ -131,7 +132,7 @@ const updateBlog = async (req,res) =>{
             // if content update
             console.log('Content of blog is updated');
             updatedBlog = await Blog.findOneAndUpdate(
-                {email, title}, // filter
+                {_id:id}, // filter
                 {content:content}, // update
                 {new:true} // return the updated document
             );
@@ -140,7 +141,7 @@ const updateBlog = async (req,res) =>{
             // if both title and content are to be updated
             console.log('Title & Content of blog is updated');
             updatedBlog = await Blog.findOneAndUpdate(
-                {email, title}, // filter
+                {_id:id}, // filter
                 {title:newTitle,content:content}, // update
                 {new:true} // return the updated document
             );
@@ -161,7 +162,8 @@ const updateBlog = async (req,res) =>{
 
 const deleteBlog = async (req,res) =>{
     try{
-        const deleteBlog = await Blog.findOneAndDelete({email:req.body.email, title:req.body.title})
+        const id = req.params.id;
+        const deleteBlog = await Blog.findOneAndDelete({_id:id})
         if (!deleteBlog) {
             return res.status(404).json({ message: "Blog not found" });
         }
@@ -212,7 +214,7 @@ const getAllBlogs = async (req,res) =>{
         let page = parseInt(req.query.page) || 1;
         let limit = parseInt(req.query.limit) || 5;
         const allBlogs = await Blog.find();
-        let startIndex = page-1;
+        let startIndex = (page-1) * limit;
         let lastIndex = page * limit;
         let result = allBlogs.slice(startIndex, lastIndex);
         let size = allBlogs.length

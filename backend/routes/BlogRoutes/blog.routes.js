@@ -26,12 +26,12 @@ router.get('/user-blogs', validateToken, handler, getBlogs);
 // @description update a blog
 // @route PATCH /updateBlog
 // @access public
-router.patch('/', validateToken, handler, updateBlog);
+router.patch('/:id', validateToken, handler, updateBlog);
 
 // @description delete a blog
 // @route DELETE /deleteBlog
 // @access public
-router.delete('/', validateToken, handler, deleteBlog);
+router.delete('/:id', validateToken, handler, deleteBlog);
 
 
 export default router;

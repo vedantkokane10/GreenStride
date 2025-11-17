@@ -187,10 +187,27 @@ const generateNewAccesToken = async(req,res) =>{
 }
 
 const getUserData = asyncHandler(async (req, res) => {
-    const { email } = req.user; //  email is decoded from token by middleware
-    const user = await User.findUser(email);
-
-    res.json(user);
+    try {
+        const { email } = req.user; //  email is decoded from token by middleware
+        const user = await User.findUser(email);
+        return res.status(200).json(new ApiResponse(user, 'User data fetched successfully', 200, true));
+    }
+     catch (error) {
+        throw new ApiError(500, "Error on server side while fetching the user details");
+    }
 });
 
-export { login, register, generateNewAccesToken };
+const updateCountry = asyncHandler(async (req,res) =>{
+    try {
+        console.log(req.body);
+        const {email} = req.user;
+        const country = req.body.country;
+        console.log(email, country);
+        const result = await User.updateCountry(email, country);
+        return res.status(200).json(new ApiResponse(result, `User's country updated successfully`, 200, true));
+    } catch (error) {
+        throw new ApiError(500, "Error on server side while updating the user's country");
+    }
+})
+
+export { login, register, generateNewAccesToken, getUserData, updateCountry};
