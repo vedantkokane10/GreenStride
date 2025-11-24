@@ -1,4 +1,9 @@
+// No longer in use as migrated to postgres database
+
+
 import mongoose from "mongoose";
+
+
 
 const activitySchema = new mongoose.Schema({
     user:{

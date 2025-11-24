@@ -1,3 +1,6 @@
+// No longer in use as migrated to postgres database
+
+
 import mongoose from "mongoose";
 
 
