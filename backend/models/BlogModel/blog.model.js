@@ -28,3 +28,4 @@ const BlogSchema = new mongoose.Schema({
 
 
 export default mongoose.model('Blog',BlogSchema);
+// saved as blogs in mongo database

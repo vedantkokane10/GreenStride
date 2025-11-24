@@ -12,11 +12,49 @@ const GetAllBlogs = () => {
   const [nextPage, setNextPage] = useState(null);
   const [prevPage, setPrevPage] = useState(null);
   const [url, setUrl] = useState('/blog');
-
+  const [searchQuery, setSearchQuery] = useState('Search for blogs...');
+  const [searchQueryPlaceholder, setSearchQueryPlaceholder] = useState('Search for blogs...');
   useEffect(() => {
     setAuthenticated(true);
     fetchBlogs();
   }, [url,setAuthenticated]);
+
+  const searchQueryChange  = (event) =>{
+    setSearchQuery(event.target.value);
+  }
+
+  const searchBlogs = async() =>{
+    try {
+      setLoading(true);
+      setError(null);
+      let url = `/blog/search?q=${searchQuery}`
+      const response = await API.get(url);
+      const result = response.data.result;
+      setBlogs(result.result || []);
+      console.log(result.result);
+      setSearchQuery('');
+      if(result.previous){
+        setPrevPage(result.previous.url.replace('/api',""));
+      }
+      else{
+        setPrevPage(null);
+      }
+
+      if(result.next){
+        setNextPage(result.next.url.replace('/api',""));
+      }
+      else{
+        setNextPage(null);
+      }
+    } 
+    catch (error) {
+      setError(error);
+      console.log(error);
+    }
+    finally{
+      setLoading(false);
+    }
+  }
 
   const fetchBlogs = async () => {
     try {
@@ -107,6 +145,11 @@ const GetAllBlogs = () => {
 
   return (
     <div className="blog-container">
+      <div className='search-box'>
+        <input placeholder='Search for blogs...' onChange={searchQueryChange} />
+        <button onClick={searchBlogs} style={{borderRadius:"25px", cusor:"pointer", height:"35px", width:"100px", background:"none", marginBottom:"2px" }}>search</button>
+      </div>
+      
       {blogs.map((blog) => (
         <BlogCard
           key={blog._id || blog.id}

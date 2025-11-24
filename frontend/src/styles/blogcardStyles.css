@@ -218,3 +218,10 @@
     height: 32px;
   }
 }
+
+.search-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}

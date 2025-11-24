@@ -244,6 +244,57 @@ const getAllBlogs = async (req,res) =>{
     }
 };
 
+const searchBlogs = async(req,res) =>{
+    try {
+        let page = req.query.page || 1;
+        let limit = req.query.limit || 5;
+        let response = {};
+        let startIndex = page-1;
+        let lastIndex = page * limit;
+        let searchQuery = req.query.q;
 
-export {addBlog, updateBlog, deleteBlog, getBlogs, getAllBlogs};
+        if(!searchQuery || searchQuery.trim() === ''){
+            return getAllBlogs(req,res);
+            
+        }
+
+
+        // building a search query using regex for partial matching
+        const query = { 
+            title:{$regex:searchQuery.trim(), $options:'i'} // case-insensitive search
+        };
+        
+
+
+
+        const allBlogs = await Blog.find(query)
+        console.log(searchQuery);
+        let size = allBlogs.length
+        let result = allBlogs.slice(startIndex, lastIndex);
+        
+
+        response.result = result;
+
+        if(startIndex > 0){
+            response.previous = {
+                'url':`${req.baseUrl}?page=${page-1}&limit=${limit}`
+            }
+        }
+
+        if(lastIndex < size){
+            response.next = {
+                'url':`${req.baseUrl}?page=${page+1}&limit=${limit}`
+            }
+        }
+
+        return res.json(new ApiResponse(response, "Successfully fetched all the record based on search query", 200, true));
+    } 
+    catch (error) {
+        console.log(error);
+        const message = {"message":error};
+        return res.json(message)
+    }
+};
+
+export {addBlog, updateBlog, deleteBlog, getBlogs, getAllBlogs, searchBlogs};
 
