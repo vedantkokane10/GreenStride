@@ -4,7 +4,7 @@
 🗓️ *Project Date: October 2024*  
 🔗 **Live App**: Currently offline due to hosting costs optimization. Check out the demo video below!
 
-🎥 **Demo Video**: [Watch on YouTube](https://www.youtube.com/watch?v=BAy8GC4HX14) *(Note: This is an earlier version. An updated demo showcasing new features is coming soon!)*
+🎥 **Demo Video**: [Watch on YouTube](https://www.youtube.com/watch?v=P6EbK7GUFFQ)
 
 
 ---
