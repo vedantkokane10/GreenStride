@@ -3,6 +3,17 @@ import API from '../../utils/api.js';
 import '../../styles/getSuggestionsStyle.css'
 import {AuthContext} from '../../context/AuthContext';
 
+let config = {
+  method:'get',
+  url:'/activity/suggestions',
+  headers:{
+      'Accept': 'application/json'
+  },
+  data:{},
+  responseType: 'json',
+  responseEncoding: 'utf8'
+};
+
 
 const GetSuggestions = () => {
   const {setAuthenticated} = useContext(AuthContext)
@@ -15,8 +26,8 @@ const GetSuggestions = () => {
     setAuthenticated(true);
     const getSuggestions = async () => {
       try {
-        const response = await API.get('/activity/suggestions');
-
+        //const response = await API.get('/activity/suggestions');
+        let response = await API.request(config);
         console.log(response.data)
 
         setActivities(response.data);

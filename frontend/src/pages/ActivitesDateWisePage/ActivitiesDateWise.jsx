@@ -6,7 +6,13 @@ import '../../styles/dashboardStyle.css'
 
 let config = {
   method:'get',
-  url:'/activity/'
+  url:'/activity',
+  headers:{
+    
+  },
+  data:{},
+  responseType: 'json',
+  responseEncoding: 'utf8'
 };
 
 const ActivitiesDateWise = () => {
@@ -18,7 +24,8 @@ const ActivitiesDateWise = () => {
     setAuthenticated(true);
     const getActivities = async () => {
       try {
-        const response = await API.get('/activity');
+
+        const response = await API.request(config);
         
         setActivities(response.data);
       } catch (error) {

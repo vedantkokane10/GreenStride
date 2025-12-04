@@ -7,6 +7,17 @@ import { PieChart } from '../../components/PieChart';
 import {AuthContext} from '../../context/AuthContext';
 import '../../styles/dashboardStyle.css'
 
+let config = {
+  method:'get',
+  url:'/activity/current-month',
+  headers:{
+      'Accept': 'application/json'
+  },
+  data:{},
+  responseType: 'json',
+  responseEncoding: 'utf8'
+};
+
 
 const Dashboard = () => {
   const {setAuthenticated} = useContext(AuthContext)
@@ -16,8 +27,8 @@ const Dashboard = () => {
     setAuthenticated(true)
     const getAtivities = async () => {
         try{
-            const response = await API.get('/activity/current-month');
-            
+            //const response = await API.get('/activity/current-month');
+            let response = await API.request(config);
             setActivities(response.data.result);
             console.log(response.data);
             console.log(activities);

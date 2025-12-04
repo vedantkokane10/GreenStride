@@ -3,6 +3,17 @@ import API from "../../utils/api.js";
 import "../../styles/allActivitiesStyle.css";
 import { AuthContext } from "../../context/AuthContext";
 
+let config = {
+  method:'get',
+  url:'/activity',
+  headers:{
+      'Accept': 'application/json'
+  },
+  data:{},
+  responseType: 'json',
+  responseEncoding: 'utf8'
+};
+
 const AllActivities = () => {
   const { setAuthenticated } = useContext(AuthContext);
 
@@ -11,14 +22,16 @@ const AllActivities = () => {
   const [prevPage, setPrevPage] = useState(null);
 
   // Start with base URL
-  const [url, setUrl] = useState("/activity?limit=3");
+  const [url, setUrl] = useState("/activity?limit=10");
 
   useEffect(() => {
     setAuthenticated(true);
 
     const getActivities = async () => {
       try {
-        const response = await API.get(url);
+        //const response = await API.get(url);
+        config.url = url;
+        let response = await API.request(config);
         let result = response.data.result;
         console.log(result);
         setActivities(result.result);

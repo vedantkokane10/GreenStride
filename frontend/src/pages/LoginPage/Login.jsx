@@ -8,7 +8,16 @@ import {AuthContext} from '../../context/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
+let config = {
+  method:'post',
+  url:'/authentication/login',
+  headers:{
+      'Accept': 'application/json'
+  },
+  data:{},
+  responseType: 'json',
+  responseEncoding: 'utf8'
+};
 
 const Login = () => {
   const {setAuthenticated} = useContext(AuthContext)
@@ -26,7 +35,10 @@ const Login = () => {
   const handleLogin = async (event) =>{
     event.preventDefault();
     try{
-        const response = await API.post('/authentication/login',{email,password});
+        //const response = await API.post('/authentication/login',{email,password});
+        config.data = {email,password};
+        let response = await API.request(config);
+          
         console.log(response.data.result.accessToken);
         localStorage.setItem('accessToken',response.data.result.accessToken);
         localStorage.setItem('refreshToken',response.data.result.refreshToken);

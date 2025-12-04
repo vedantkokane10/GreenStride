@@ -6,6 +6,16 @@ import API from '../../utils/api';
 import {BlogCardProfile} from '../../components/BlogCardProfile';
 
 
+let config = {
+  method:'',
+  url:'',
+  headers:{
+      'Accept': 'application/json'
+  },
+  data:{},
+  responseType: 'json',
+  responseEncoding: 'utf8'
+};
 
 const countries = [
   { name: "USA", flag: "🇺🇸" },
@@ -48,7 +58,10 @@ const Profile = () => {
    setAuthenticated(true);
    const fetchUserData = async() =>{
       try {
-        const response = await API.get('/authentication/user');
+        //const response = await API.get('/authentication/user');
+        config.url = '/authentication/user';
+        config.method = 'get';
+        let response = await API.request(config);
         console.log(response);
         setProfileData({
           name: response.data.result.username || '',
@@ -62,7 +75,13 @@ const Profile = () => {
    }
    const fetchUserBlogs = async() =>{
     try {
-      const response = await API.get('/blog/user-blogs');
+      //const response = await API.get('/blog/user-blogs');
+
+      config.url = '/blog/user-blogs';
+      config.method = 'get';
+      let response = await API.request(config);
+
+
       setBlogs(response.data.result.result);
       console.log(response.data.result.result);
     } 
@@ -96,7 +115,11 @@ const Profile = () => {
   }
   const updateCountry = async() =>{
     try {
-      const response = await API.patch('/authentication/user', {country:profileData.country});  
+      //const response = await API.patch('/authentication/user', {country:profileData.country});  
+      config.url = '/authentication/user';
+      config.method = 'patch';
+      config.data = {country:profileData.country};
+      let response = await API.request(config);
       if(response.status === 200){
         alert("Updated country");
         console.log(response);

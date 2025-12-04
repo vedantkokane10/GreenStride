@@ -6,6 +6,17 @@ import '../../styles/loginStyles.css'
 import {AuthContext} from '../../context/AuthContext';
 import { useContext } from 'react';
 
+let config = {
+  method:'',
+  url:'',
+  headers:{
+      'Accept': 'application/json'
+  },
+  data:{},
+  responseType: 'json',
+  responseEncoding: 'utf8'
+};
+
 const countries = [
   { name: "USA", flag: "🇺🇸" },
   { name: "India", flag: "🇮🇳" },
@@ -57,7 +68,11 @@ const Register = () => {
   const handleRegister = async (event) =>{
     event.preventDefault(); // to prevent reloading
     try{
-        const response = await API.post('authentication/register',{userName,email,password,country});
+        //const response = await API.post('authentication/register',{userName,email,password,country});
+        config.method = 'post';
+        config.url = 'authentication/register';
+        config.data = {userName,email,password,country};
+        let response = await API.request(config);
         localStorage.setItem('accessToken',response.data.result.accessToken);
         localStorage.setItem('refreshToken',response.data.result.refreshToken);
         setAuthenticated(true);

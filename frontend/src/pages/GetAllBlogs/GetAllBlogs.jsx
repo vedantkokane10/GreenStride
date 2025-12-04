@@ -4,6 +4,18 @@ import API from '../../utils/api';
 import BlogCard from '../../components/BlogCard';
 import '../../styles/blogcardStyles.css';
 
+let config = {
+  method:'get',
+  url:'/blog/search',
+  headers:{
+      'Accept': 'application/json'
+  },
+  data:{},
+  responseType: 'json',
+  responseEncoding: 'utf8'
+};
+
+
 const GetAllBlogs = () => {
   const { setAuthenticated } = useContext(AuthContext); 
   const [blogs, setBlogs] = useState([]);
@@ -28,7 +40,9 @@ const GetAllBlogs = () => {
       setLoading(true);
       setError(null);
       let url = `/blog/search?q=${searchQuery}`
-      const response = await API.get(url);
+      //const response = await API.get(url);
+      config.url = url;
+      let response = await API.request(config);
       const result = response.data.result;
       setBlogs(result.result || []);
       console.log(result.result);

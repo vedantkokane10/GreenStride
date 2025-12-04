@@ -4,6 +4,17 @@ import {AuthContext} from '../../context/AuthContext';
 import '../../styles/dashboardStyle.css'
 
 
+let config = {
+    method:'get',
+    url:'/activity/leaderboard',
+    headers:{
+        'Accept': 'application/json'
+    },
+    data:{},
+    responseType: 'json',
+    responseEncoding: 'utf8'
+};
+
 const Leaderboard = () => {
     const {setAuthenticated} = useContext(AuthContext)
     const [leaderboardUsers, setLeaderboardUsers] = useState([]);
@@ -15,7 +26,10 @@ const Leaderboard = () => {
         setAuthenticated(true);
         const getLeaderboardUsers = async () => {
             try {
-                const response = await API.get('/activity/leaderboard');
+                //const response = await API.get('/activity/leaderboard');
+                
+                let response = await API.request(config);
+
                 console.log(response.data);
                 setLeaderboardUsers(response.data.result);
 

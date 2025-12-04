@@ -6,6 +6,18 @@ import { AuthContext } from '../../context/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
+let config = {
+    method:'post',
+    url:'/activity',
+    headers:{
+        'Accept': 'application/json'
+    },
+    data:{},
+    responseType: 'json',
+    responseEncoding: 'utf8'
+};
+
 const emissionFactors = {
     "carTravel": 0.18,           // kg CO₂e per km (petrol car)
     "electricity": 0.82,         // kg CO₂e per kWh
@@ -66,7 +78,11 @@ const AddActivity = () => {
             if (type === 'electricity') {
                 emission = (powerWatt / 1000) * hours;
             }
-            const response = await API.post('/activity', { type, carbonEmission: emission });
+            //const response = await API.post('/activity', { type, carbonEmission: emission });
+            config.data = {type, carbonEmission:emission};
+
+            const response = await API.request(config);
+
             console.log(response.data.newActivity);
             if(response.status === 401){
                 console.log("Acces Token has been expired");

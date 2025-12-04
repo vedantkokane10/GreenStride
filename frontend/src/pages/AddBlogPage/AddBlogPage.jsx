@@ -5,6 +5,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../context/AuthContext.jsx';
 
+let config = {
+    method:'post',
+    url:'/blog',
+    headers:{
+        'Accept': 'application/json'
+    },
+    data:{},
+    responseType: 'json',
+    responseEncoding: 'utf8'
+};
+
 const AddBlogPage = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -14,7 +25,9 @@ const AddBlogPage = () => {
         e.preventDefault();
         try {
             let response;
-            response = await API.post('/blog', { title, content });
+            // response = await API.post('/blog', { title, content });
+            config.data = {title, content};
+            response = await API.request(config);
             console.log(response.data);
             if(response.data.success === true){
                 toast.success('Blog added successfully!');
